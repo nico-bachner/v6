@@ -11,6 +11,12 @@ const Page = () => (
         Entrepreneur.
       </span>
     </section>
+
+    <section className="mx-auto my-24 flex max-w-2xl flex-col gap-8 sm:my-40 lg:my-56">
+      <h2 className="text-3xl font-extrabold tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl lg:text-5xl">
+        About
+      </h2>
+    </section>
   </main>
 )
 
