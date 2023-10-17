@@ -21,8 +21,10 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => (
         inter.className,
       )}
     >
-      <Theme>{children}</Theme>
-      <CommandMenu />
+      <Theme>
+        {children}
+        <CommandMenu />
+      </Theme>
     </body>
   </html>
 )
