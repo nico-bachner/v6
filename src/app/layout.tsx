@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 
+import { CommandMenu } from '@/components/client/CommandMenu'
 import { Theme } from '@/providers/Theme'
 import '@/styles/tailwind.css'
 import { cn } from '@/utils/cn'
@@ -21,6 +22,7 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => (
       )}
     >
       <Theme>{children}</Theme>
+      <CommandMenu />
     </body>
   </html>
 )
