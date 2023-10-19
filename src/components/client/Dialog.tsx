@@ -2,14 +2,23 @@
 
 import { Content, Overlay, Portal, Root } from '@radix-ui/react-dialog'
 
+import { cn } from '@/utils/cn'
+
 export const Dialog: React.FC<React.ComponentProps<typeof Root>> = ({
   children,
   ...props
 }) => (
   <Root {...props}>
     <Portal>
-      <Overlay className="fixed inset-0 bg-white/50 backdrop-blur-sm dark:bg-black/50" />
-      <Content className="fixed left-[50%] top-[50%] z-50 w-full max-w-xl translate-x-[-50%] translate-y-[-50%] rounded-xl border-gray-700 bg-white/75 shadow-xl backdrop-blur-lg dark:border dark:bg-black/75">
+      <Overlay
+        className={cn('bg-white/5 shadow backdrop-blur', 'fixed inset-0')}
+      />
+      <Content
+        className={cn(
+          'bg-white/10 shadow-lg backdrop-blur-lg',
+          'fixed left-[50%] top-[50%] z-50 w-full max-w-xl translate-x-[-50%] translate-y-[-50%] rounded-lg',
+        )}
+      >
         {children}
       </Content>
     </Portal>

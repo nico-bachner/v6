@@ -1,0 +1,26 @@
+---
+title: v6
+description: Notes concerning the development and design of the 6th iteration of my personal website
+---
+
+## Style Guide
+
+### Colour
+
+| Element                         | Code                               |
+| ------------------------------- | ---------------------------------- |
+| Heading Text (`h1`, `h2`, etc.) | `text-gray-900 dark:text-gray-100` |
+| Body Text (`p`)                 | `text-gray-700 dark:text-gray-300` |
+| Separator (e.g. `<hr>`)         | `border-gray-500/20`               |
+| Background                      | `bg-gray-50 dark:bg-gray-950`      |
+
+### Elevation
+
+Elevation uses a combination of glassmorphism and shadows. The effect of the shadows is more pronounced in light mode, whereas in dark mode the brightness of an element corresponds to its elevation.
+
+| Height | Code                                     |
+| ------ | ---------------------------------------- |
+| 1      | `bg-white/5 shadow backdrop-blur`        |
+| 2      | `bg-white/10 shadow-lg backdrop-blur-lg` |
+
+Elevation has a componding effect. When differentiating a level 2 element from a level 1 element when superpositioned, a height of 1 can be used to achieve the same effect as independently using a height of 2.
