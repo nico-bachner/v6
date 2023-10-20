@@ -1,5 +1,4 @@
 import { promises as fs } from 'fs'
-import Link from 'next/link'
 
 import { InfoCard } from '@/components/ui/InfoCard'
 import { fetchMDXData } from '@/lib/fetchMDXData'
@@ -12,6 +11,22 @@ const Page = async () => {
       .map(async (slug) => await fetchMDXData(`src/app/(projects)`, slug)),
   )
 
+  const getPeriod = (from: number, to: number | null) => {
+    const from_year = new Date(from).getFullYear()
+
+    if (to) {
+      const to_year = new Date(to).getFullYear()
+
+      if (to_year == from_year) {
+        return to_year.toString()
+      }
+
+      return [from_year, to_year].join(' – ')
+    }
+
+    return `${from_year} – Now`
+  }
+
   return (
     <main className="flex flex-col gap-12 px-6 pb-36 pt-12 md:pt-20 lg:pt-28">
       <div className="mx-auto flex max-w-2xl flex-col gap-8">
@@ -19,11 +34,11 @@ const Page = async () => {
           Projects
         </h1>
 
-        <p>
+        <p className="prose dark:prose-invert sm:prose-lg lg:prose-xl">
           A comprehensive list of all the projects I have worked on, past &
           present, sorted in reverse chronological order by their respective
-          dates of completion. <br /> Click on a card to reveal more information
-          about the project.
+          dates of completion. Click on a card to reveal more information about
+          the project.
         </p>
       </div>
 
@@ -44,13 +59,13 @@ const Page = async () => {
 
             return b.from - a.from
           })
-          .map(({ title, description, slug }) => (
+          .map(({ title, description, slug, from, to }) => (
             <InfoCard
               key={slug}
               href={slug}
               header={title}
               body={description}
-              cta="More Information"
+              info={getPeriod(from, to)}
               className="md:col-span-2 md:odd:col-start-1 md:even:col-start-2"
             />
           ))}

@@ -1,0 +1,208 @@
+---
+title: CSS Modules
+description: A collection of tips & tricks for styling versatile React components using CSS Modules
+published: 2021-09-10
+---
+
+[CSS Modules](https://github.com/css-modules/css-modules) are one of the most common methods to style React applications. Because they consist of plain CSS, they are easily understandable.
+
+CSS Modules achieve what is referred to as **_weak scoping_**. Although styles are scoped to their respective components, they can be overridden by external styles. Depending on how you use this property, this is what makes CSS Modules so useful.
+
+The usual approach to styling components using CSS Modules looks something like this:
+
+The CSS is written in a `.module.css` file, and target class names.
+
+```css
+/* Component.module.css */
+.component {
+  property-1: 'value-1';
+  property-2: 'value-2';
+}
+```
+
+These classes are then imported as a JS object – usually given the name `styles`. The imported object is has the class names defined in the `.module.css` file as keys.
+
+```tsx
+// Component.tsx
+import styles from './Component.module.css'
+
+export const Component: React.FC = ({ children }) => (
+  <div className={styles.component}>{children}</div>
+)
+```
+
+```tsx
+// index.tsx
+import { Component } from './Component'
+
+export const ParentComponent: React.VFC = () => (
+  <Component>Some Content</Component>
+)
+```
+
+That's all well and good. But what if you want to be able to adjust the styles from **outside** the component? Now things start to get tricky.
+
+Fortunately, CSS Module imports are regular JavaScript objects. That means we can manipulate them as we usually would. One possible manipulation that is especially useful for us is **_string indexing[^1]_**. It allows us to choose which style to apply based on a string input.
+
+If we apply _string indexing_ to the previous example, we get the following:
+
+```css
+/* Component.module.css */
+.variant-1 {
+  property-1: 'value-1-1';
+  property-2: 'value-2-1';
+}
+
+.variant-2 {
+  property-1: 'value-1-2';
+  property-2: 'value-2-2';
+}
+
+.variant-3 {
+  property-1: 'value-1-3';
+  property-2: 'value-2-3';
+}
+```
+
+```tsx
+// Component.tsx
+import styles from './Component.module.css'
+
+type ComponentProps = {
+  variant: '1' | '2' | '3'
+}
+
+export const Component: React.FC<ComponentProps> = ({ children, variant }) => (
+  <div className={styles[`variant-${variant}`]}>{children}</div>
+)
+```
+
+```tsx
+// index.tsx
+import { Component } from './Component'
+
+export const ParentComponent: React.VFC = () => (
+  <Component variant="1">Some Content</Component>
+)
+```
+
+We now have the ability to change the styling of the component through one of its props.
+
+But why stop there? What about styling through **multiple** props?
+
+It is possible, and can be achieved through **_string concatenation[^2]_**. Applied to our example, it looks like so:
+
+```css
+/* Component.module.css */
+.property1-1 {
+  property-1: 'value-1-1';
+}
+.property2-1 {
+  property-2: 'value-2-1';
+}
+
+.property1-2 {
+  property-1: 'value-1-2';
+}
+.property2-2 {
+  property-2: 'value-2-2';
+}
+
+.property1-3 {
+  property-1: 'value-1-3';
+}
+.property2-3 {
+  property-2: 'value-2-3';
+}
+```
+
+```tsx
+// Component.tsx
+import styles from './Component.module.css'
+
+type ComponentProps = {
+  property1: '1' | '2' | '3'
+  property2: '1' | '2' | '3'
+}
+
+export const Component: React.FC<ComponentProps> = ({
+  children,
+  property1,
+  property2,
+}) => (
+  <div
+    className={[
+      styles[`property1-${property1}`],
+      styles[`property1-${property2}`],
+    ].join(' ')}
+  >
+    {children}
+  </div>
+)
+```
+
+```tsx
+// index.tsx
+import { Component } from './Component'
+
+export const ParentComponent: React.VFC = () => (
+  <Component property1="2" property2="3">
+    Some Content
+  </Component>
+)
+```
+
+If distilling all component styling into props feels too limiting, there exists a solution. It is possible to give a component custom styles by passing it a `className` prop:
+
+```css
+/* Component.module.css */
+
+/* omitted for brevity — same as the above example */
+```
+
+```tsx
+// Component.tsx
+import styles from './Component.module.css'
+
+type ComponentProps = {
+  property1: '1' | '2' | '3'
+  property2: '1' | '2' | '3'
+  className?: string
+}
+
+export const Component: React.FC<ComponentProps> = ({
+  children,
+  property1,
+  property2,
+  className,
+}) => (
+  <div
+    className={[
+      styles[`property1-${property1}`],
+      styles[`property1-${property2}`],
+      className,
+    ].join(' ')}
+  >
+    {children}
+  </div>
+)
+```
+
+```tsx
+// index.tsx
+import { Component } from './Component'
+import styles from './ParentComponent.module.css'
+
+export const ParentComponent: React.VFC = () => (
+  <Component property1="2" property2="3" className={styles.component}>
+    Some Content
+  </Component>
+)
+```
+
+One thing to look out for is the whitespace as the argument of `.join()`. Without it, the class names would be concatenated into one long name which the browser cannot recognise. Adding the space separates the class names into recognisable tokens.
+
+Notice how have full control over how fine-grain the control should be? While the first example only had one prop (the `variant`), the second had a prop for each individual style property (`property1` and `property2`). The ability to choose the level of abstraction can be useful in many situations, such as architecting a design system.
+
+[^1]: **String indexing:** The accessing a property of an object using the corresponding string
+[^2]: **String concatenation:** The joining of two strings together into one large string

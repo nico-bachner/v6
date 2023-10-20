@@ -3,8 +3,7 @@ import { promises as fs } from 'fs'
 import { EditOnGitHub } from '@/components/client/EditOnGitHub'
 import { Header } from '@/components/client/Header'
 import { LastUpdated } from '@/components/client/LastUpdated'
-import { Next } from '@/components/client/Next'
-import { Previous } from '@/components/client/Previous'
+import { Navigation } from '@/components/client/Navigation'
 import { ReadingTime } from '@/components/client/ReadingTime'
 import { Back } from '@/components/ui/Back'
 import { fetchMDXData } from '@/lib/fetchMDXData'
@@ -58,10 +57,8 @@ const Template: React.FC<{ children: React.ReactNode }> = async ({
         <hr />
 
         <div className="mb-32 flex flex-col gap-8">
-          <div className="flex items-center justify-between">
-            <Previous items={projects} />
-            <Next items={projects} />
-          </div>
+          <Navigation items={projects} />
+
           <div className="flex justify-center">
             <EditOnGitHub />
           </div>

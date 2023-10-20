@@ -5,3 +5,7 @@
 [cmdk-group-heading] {
   @apply p-3 text-sm capitalize;
 }
+
+.hljs-comment {
+  @apply text-gray-500;
+}

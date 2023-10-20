@@ -1,0 +1,265 @@
+---
+title: Mac Setup
+description: The procedure I refer to when performing a clean (re)install on an Apple Macintosh
+---
+
+This is the procedure I refer to when performing a clean (re)install on an Apple Macintosh, recently updated for MacOS Ventura.
+
+## Settings Adjustments
+
+### System Settings
+
+Once the initial setup procedure is done, customise the trackpad settings (`System Settings > View > Trackpad`).
+
+In the _Point & Click_ tab
+
+1. Turn on _tap to click_
+2. Set _click strength_ to **light**
+3. Set _tracking speed_ to the maximum value
+4. Turn on _silent clicking_
+
+Now move on to the Dock settings (`View > Desktop & Dock`):
+
+1. Automatically hide & show the Dock
+2. Do not show recent applications in Dock
+3. In _Hot Corners_, deactivate all shortcuts.
+
+### Finder Settings
+
+1. Configure _Settings_ (`Finder > Settings`):
+
+   - In _Sidebar_, show the _Home_ folder and hide the _Recents_ folder
+   - In Advanced, enable _Show all filename extensions_
+
+2. Adjust _Default View Options_ (`View > Show View Options`):
+
+   - Set _Sort By_ to _Kind_
+   - Enable _Show Item Info_
+
+### Safari Settings
+
+1. Adjust _Settings_ (`Safari > Settings`):
+
+   - In _Search_, switch the default search engine.
+   - In _Advanced_, turn on _Show full website address_ and _Show Develop menu in menu bar_
+
+2. Show Status Bar: `View > Show Status Bar`
+
+## Command Line Setup
+
+### System Settings
+
+```bash
+# Don't create .DS_Store files
+defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
+
+# Disable auto-correct
+defaults write -g NSAutomaticSpellingCorrectionEnabled -bool false
+```
+
+### XCode Command Line Tools
+
+1. Install the XCode Command Line Tools:
+
+   ```bash
+   xcode-select --install
+   ```
+
+### Homebrew Setup
+
+1. Install [Homebrew](https://brew.sh)
+
+   ```bash
+   sudo curl -fsSL "https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh" | bash
+   ```
+
+### Terminal Shell
+
+1. Install [Fish Shell](https://fishshell.com):
+
+   ```bash
+   /opt/homebrew/bin/brew install fish
+   ```
+
+2. Set Fish as default shell:
+
+   ```bash
+   echo /opt/homebrew/bin/fish | sudo tee -a /etc/shells
+   chsh -s /opt/homebrew/bin/fish
+   ```
+
+3. Since it is a new shell, Homebrew is no longer in `$PATH`, so it needs to be re-added:
+
+   ```bash
+   fish_add_path /opt/homebrew/bin
+   ```
+
+4. When opening a new terminal window, fish shows a welcome message. To disable this, run the following:
+
+   ```bash
+   set -g fish_greeting ""
+   ```
+
+5. To make the terminal more interactive, install [Starship](https://starship.rs):
+
+   ```bash
+   brew install starship
+   ```
+
+6. Starship needs to be initialised on shell startup:
+
+   ```bash
+   echo "starship init fish | source" > ~/.config/fish/config.fish
+   ```
+
+### Fonts
+
+1. Open the Homebrew Cask Fonts tap
+
+   ```bash
+   brew tap homebrew/cask-fonts
+   ```
+
+1. Install [Fira Code](https://github.com/tonsky/FiraCode)
+
+   ```bash
+   brew install --cask font-fira-code
+   ```
+
+Go to _Terminal > Settings_ and change the font to **Fira Code**.
+
+### Git
+
+1. Change Git credentials:
+
+   ```bash
+   git config --global --edit
+   ```
+
+### GitHub CLI
+
+1. [Log in to GitHub](https://github.com/login).
+
+2. Install the [GitHub CLI](https://cli.github.com)
+
+   ```bash
+   brew install gh
+   ```
+
+3. Login to the GitHub CLI
+
+   ```bash
+   gh auth login
+   ```
+
+### Node.js
+
+1. Install [Node.js](https://nodejs.org):
+
+   ```bash
+   brew install node@16
+   ```
+
+2. Configure Node for Fish
+
+   ```
+   fish_add_path /opt/homebrew/opt/node@16/bin
+   ```
+
+3. Install [pnpm](https://pnpm.io):
+
+   ```bash
+   brew install pnpm
+   ```
+
+4. Run the automatic setup script:
+
+   ```bash
+   pnpm setup
+   ```
+
+5. Install [ni](https://github.com/antfu/ni):
+
+   ```bash
+   pnpm add -g @antfu/ni
+   ```
+
+### Setup Workspace
+
+1. Create a `projects/` directory
+
+   ```bash
+   mkdir ~/projects
+   ```
+
+2. Set the directory as the starting point when opening a new shell
+   ```bash
+   echo "cd ~/projects" >> ~/.config/fish/config.fish
+   ```
+
+### Vercel CLI
+
+1. [Log in to Vercel](https://vercel.com/login)
+
+2. Install the [Vercel CLI](https://vercel.com/cli)
+
+   ```bash
+   pnpm add -g vercel
+   ```
+
+3. Link current project
+
+   ```bash
+   vercel link
+   ```
+
+4. Fetch environmental variables
+
+   ```bash
+   vercel pull
+   ```
+
+## Applications Setup
+
+```bash
+brew tap homebrew/cask
+```
+
+### Raycast
+
+1. Install [Raycast](https://code.visualstudio.org)
+
+   ```bash
+   brew install --cask raycast
+   ```
+
+2. Open Raycast
+
+3. Disable Spotlight hotkey (`System Settings > View > Keyboard > Keyboard Shortcuts > Spotlight > Show Spotlight search`)
+
+4. Set Raycast shortcut to `cmd + space`.
+
+5. In Raycast, go to **Store** and install the following extensions:
+
+   - Brew
+   - Kill Process
+   - Lorem Ipsum
+   - Speedtest
+
+### Visual Studio Code
+
+1. Install [Visual Studio Code](https://code.visualstudio.org)
+
+   ```bash
+   brew install --cask visual-studio-code
+   ```
+
+2. Install global extensions:
+
+   - [GitHub Theme](https://marketplace.visualstudio.com/items?itemName=GitHub.github-vscode-theme)
+   - [GitHub Copilot](https://marketplace.visualstudio.com/items?itemName=GitHub.copilot)
+   - [GitLens](https://marketplace.visualstudio.com/items?itemName=eamodio.gitlens)
+   - [VSCode Icons](https://marketplace.visualstudio.com/items?itemName=vscode-icons-team.vscode-icons)
+   - [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
+   - [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
+   - [MDX](https://marketplace.visualstudio.com/items?itemName=unifiedjs.vscode-mdx)

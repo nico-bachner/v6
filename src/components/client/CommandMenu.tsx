@@ -168,7 +168,7 @@ export const CommandMenu = () => {
   ]
 
   useHotkeys([
-    ['space', () => setOpen(!open)],
+    ['mod+k', () => setOpen(!open)],
     ...items
       .filter(({ shortcut }) => shortcut)
       .map(
@@ -181,7 +181,7 @@ export const CommandMenu = () => {
 
   return (
     <>
-      <nav className="fixed bottom-4 left-0 right-0 z-20 flex justify-center">
+      <nav className="fixed bottom-4 right-4 z-20 flex justify-center sm:bottom-6 sm:right-6 lg:bottom-8 lg:right-8">
         <button
           onClick={() => {
             setOpen(!open)
@@ -203,7 +203,7 @@ export const CommandMenu = () => {
             : setOpen(false)
         }
       >
-        <Command>
+        <Command className="bg-transparent">
           <div className="flex flex-col-reverse gap-3 p-3">
             <div className="flex items-center gap-4 px-3">
               <MagnifyingGlassIcon className="h-6 w-6" />
@@ -237,7 +237,7 @@ export const CommandMenu = () => {
 
           <hr className="border-gray-500/20" />
 
-          <Command.List className="max-h-80 overflow-y-scroll p-3 px-3">
+          <Command.List className="my-3 max-h-80 overflow-y-scroll px-3">
             <Command.Empty className="p-6 text-center">
               No results found.
             </Command.Empty>
@@ -261,7 +261,7 @@ export const CommandMenu = () => {
                           action()
                         }}
                         className={cn(
-                          'data-[selected=true]:bg-white/5 data-[selected=true]:shadow data-[selected=true]:backdrop-blur-sm',
+                          'data-[selected=true]:backdrop-blur-sm data-[selected=true]:bg-white/5 data-[selected=true]:shadow',
                           'flex cursor-pointer items-center gap-4 rounded p-3',
                         )}
                       >
