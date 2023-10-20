@@ -1,3 +1,4 @@
+import { Analytics } from '@vercel/analytics/react'
 import type { Metadata } from 'next'
 import { Fraunces, Inter } from 'next/font/google'
 
@@ -36,6 +37,8 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => (
         {children}
         <CommandMenu />
       </Theme>
+
+      <Analytics />
     </body>
   </html>
 )

@@ -22,6 +22,7 @@ import { useState } from 'react'
 import { Dialog } from '@/components/client/Dialog'
 import { CommandIcon } from '@/icons/Command'
 import { GitHubIcon } from '@/icons/GitHub'
+import { LinkedInIcon } from '@/icons/LinkedIn'
 import { cn } from '@/utils/cn'
 
 import { KeyboardShortcut } from '../ui/KeyboardShortcut'
@@ -48,7 +49,7 @@ export const CommandMenu = () => {
       id: 'Home',
       icon: HomeModernIcon,
       title: 'Go Home',
-      group: 'navigation',
+      group: 'Navigation',
       shortcut: 'ctrl+1',
       action: () => {
         router.push('/')
@@ -58,7 +59,7 @@ export const CommandMenu = () => {
       id: 'Projects',
       icon: WrenchIcon,
       title: 'Browse Projects',
-      group: 'navigation',
+      group: 'Navigation',
       shortcut: 'ctrl+2',
       action: () => {
         router.push('/projects')
@@ -68,10 +69,46 @@ export const CommandMenu = () => {
       id: 'Notes',
       icon: PencilIcon,
       title: 'Read Notes',
-      group: 'navigation',
+      group: 'Navigation',
       shortcut: 'ctrl+3',
       action: () => {
         router.push('/notes')
+      },
+    },
+    {
+      id: 'Email',
+      icon: EnvelopeIcon,
+      title: 'Send Me an Email',
+      group: 'Contact',
+      action: () => {
+        window.open('mailto:mail@nbac.me')
+      },
+    },
+    {
+      id: 'LinkedIn',
+      icon: LinkedInIcon,
+      title: 'Connect on LinkedIn',
+      group: 'Contact',
+      action: () => {
+        window.open('https://www.linkedin.com/in/nico-bachner/')
+      },
+    },
+    {
+      id: 'CV',
+      icon: UserIcon,
+      title: 'Curriculum Vitae',
+      group: 'Personal Info',
+      action: () => {
+        window.open('https://read.cv/nico_bachner')
+      },
+    },
+    {
+      id: 'GitHub',
+      icon: GitHubIcon,
+      title: 'Browse my GitHub',
+      group: 'Personal Info',
+      action: () => {
+        window.open('https://github.com/nico-bachner')
       },
     },
     {
@@ -83,7 +120,7 @@ export const CommandMenu = () => {
           ? MoonIcon
           : ComputerDesktopIcon,
       title: 'Change Theme...',
-      group: 'settings',
+      group: 'Settings',
       shortcut: 'ctrl+t',
       action: () => {
         setOpen(true)
@@ -94,7 +131,7 @@ export const CommandMenu = () => {
           id: 'Light Theme',
           icon: SunIcon,
           title: 'Change Theme to Light',
-          group: 'general',
+          group: 'settings',
           action: () => {
             setTheme('light')
           },
@@ -103,7 +140,7 @@ export const CommandMenu = () => {
           id: 'Dark Theme',
           icon: MoonIcon,
           title: 'Change Theme to Dark',
-          group: 'general',
+          group: 'settings',
           action: () => {
             setTheme('dark')
           },
@@ -112,7 +149,7 @@ export const CommandMenu = () => {
           id: 'System Theme',
           icon: ComputerDesktopIcon,
           title: 'Change Theme to System',
-          group: 'general',
+          group: 'settings',
           action: () => {
             setTheme('system')
           },
@@ -120,37 +157,10 @@ export const CommandMenu = () => {
       ],
     },
     {
-      id: 'GitHub',
-      icon: GitHubIcon,
-      title: 'Follow Me on GitHub',
-      group: 'social',
-      action: () => {
-        window.open('https://github.com/nico-bachner')
-      },
-    },
-    {
-      id: 'Email',
-      icon: EnvelopeIcon,
-      title: 'Send Me an Email',
-      group: 'contact',
-      action: () => {
-        window.open('mailto:mail@nbac.me')
-      },
-    },
-    {
-      id: 'CV',
-      icon: UserIcon,
-      title: 'Curriculum Vitae',
-      group: 'miscellaneous',
-      action: () => {
-        window.open('https://read.cv/nico_bachner')
-      },
-    },
-    {
       id: 'Copy URL',
       icon: ClipboardIcon,
       title: 'Copy Current URL',
-      group: 'miscellaneous',
+      group: 'Miscellaneous',
       shortcut: 'ctrl+c',
       action: () => {
         navigator.clipboard.writeText(window.location.href)
@@ -160,7 +170,8 @@ export const CommandMenu = () => {
       id: 'Source',
       icon: CodeBracketIcon,
       title: 'View Source Code',
-      group: 'miscellaneous',
+      group: 'Miscellaneous',
+      shortcut: 'ctrl+u',
       action: () => {
         window.open('https://github.com/nico-bachner/v6')
       },

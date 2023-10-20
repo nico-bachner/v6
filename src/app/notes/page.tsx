@@ -24,8 +24,8 @@ const Page = async () => {
         </p>
       </div>
 
-      <div className="mx-auto grid max-w-2xl gap-12 lg:max-w-5xl lg:grid-cols-2">
-        <div className="flex flex-col gap-2">
+      <div className="flex flex-col gap-12">
+        <div className="mx-auto flex max-w-2xl flex-col gap-2">
           <h2 className="font-serif text-2xl font-bold tracking-tight text-gray-900 dark:text-gray-100 sm:text-3xl lg:text-4xl">
             Timeless
           </h2>
@@ -36,7 +36,7 @@ const Page = async () => {
           </p>
         </div>
 
-        <div className="flex flex-col gap-6">
+        <div className="mx-auto grid max-w-2xl gap-6 lg:max-w-5xl lg:grid-cols-2">
           {data
             .filter(({ published }) => !published)
             .map(({ title, description, slug }) => (
@@ -45,12 +45,13 @@ const Page = async () => {
                 href={slug}
                 header={title}
                 body={description}
-                className="md:col-span-2 md:odd:col-start-1 md:even:col-start-2"
               />
             ))}
         </div>
+      </div>
 
-        <div className="flex flex-col gap-2 lg:col-start-2 lg:row-start-1">
+      <div className="flex flex-col gap-12">
+        <div className="mx-auto flex max-w-2xl flex-col gap-2">
           <h2 className="font-serif text-2xl font-bold tracking-tight text-gray-900 dark:text-gray-100 sm:text-3xl lg:text-4xl">
             Timestamped
           </h2>
@@ -62,7 +63,7 @@ const Page = async () => {
           </p>
         </div>
 
-        <div className="flex flex-col gap-6">
+        <div className="mx-auto grid max-w-2xl gap-6 lg:max-w-5xl lg:grid-cols-2">
           {data
             .filter(({ published }) => published)
             .sort((a, b) => b.published - a.published)
@@ -73,7 +74,6 @@ const Page = async () => {
                 header={title}
                 body={description}
                 info={new Date(published).toLocaleDateString()}
-                className="md:col-span-2 md:odd:col-start-1 md:even:col-start-2"
               />
             ))}
         </div>

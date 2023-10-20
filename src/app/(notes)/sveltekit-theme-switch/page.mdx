@@ -74,7 +74,7 @@ We now have a Svelte Store that stores the theme value, and a theme switch compo
 The way I went about this is swapping stylesheets in the head of the generated document.
 
 ```html
-<!-- src/routes/__layout.svelte -->
+<!-- src/routes/+layout.svelte -->
 <script lang="ts">
   import { theme } from '$lib/stores'
 </script>
