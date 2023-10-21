@@ -36,9 +36,32 @@ const config: Config = {
       '8xl': ['6rem', { lineHeight: '1.225' }],
       '9xl': ['8rem', { lineHeight: '1.2' }],
     },
-
+    height: ({ theme }) => ({
+      ...theme('spacing'),
+      screen: '100dvh',
+    }),
+    spacing: {
+      0: '0rem',
+      1: '0.25rem',
+      2: '0.5rem',
+      3: '0.75rem',
+      4: '1rem',
+      5: '1.25rem',
+      6: '1.5rem',
+      8: '2rem',
+      10: '2.5rem',
+      12: '3rem',
+      16: '4rem',
+      20: '5rem',
+      24: '6rem',
+      32: '8rem',
+      40: '10rem',
+      60: '15rem',
+      80: '20rem',
+    },
     extend: {},
   },
   plugins: [require('@tailwindcss/typography')],
 }
+
 export default config

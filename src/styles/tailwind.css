@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+* {
+  overflow-wrap: break-word;
+}
+
 [cmdk-group-heading] {
   @apply p-3 text-sm capitalize;
 }

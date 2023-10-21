@@ -3,7 +3,7 @@ title: Mac Setup
 description: The procedure I refer to when performing a clean (re)install on an Apple Macintosh
 ---
 
-This is the procedure I refer to when performing a clean (re)install on an Apple Macintosh, recently updated for MacOS Ventura.
+This is the procedure I refer to when performing a clean (re)install on an Apple Macintosh running MacOS Sonoma.
 
 ## Settings Adjustments
 
@@ -157,13 +157,13 @@ Go to _Terminal > Settings_ and change the font to **Fira Code**.
 1. Install [Node.js](https://nodejs.org):
 
    ```bash
-   brew install node@16
+   brew install node@18
    ```
 
 2. Configure Node for Fish
 
    ```
-   fish_add_path /opt/homebrew/opt/node@16/bin
+   fish_add_path /opt/homebrew/opt/node@18/bin
    ```
 
 3. Install [pnpm](https://pnpm.io):
@@ -216,7 +216,7 @@ Go to _Terminal > Settings_ and change the font to **Fira Code**.
 4. Fetch environmental variables
 
    ```bash
-   vercel pull
+   vercel env pull
    ```
 
 ## Applications Setup

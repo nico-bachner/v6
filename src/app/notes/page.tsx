@@ -1,18 +1,11 @@
-import { promises as fs } from 'fs'
-
 import { InfoCard } from '@/components/ui/InfoCard'
-import { fetchMDXData } from '@/lib/fetchMDXData'
+import { fetchNotes } from '@/lib/fetchNotes'
 
 const Page = async () => {
-  const routes = await fs.readdir(`${process.cwd()}/src/app/(notes)`)
-  const data = await Promise.all(
-    routes
-      .filter((route) => !route.includes('.tsx'))
-      .map(async (slug) => await fetchMDXData(`src/app/(notes)`, slug)),
-  )
+  const notes = await fetchNotes()
 
   return (
-    <main className="flex flex-col gap-20 px-6 pb-36 pt-12 md:pt-20 lg:pt-28">
+    <main className="lg:pt-28 flex flex-col gap-20 px-6 pb-32 pt-12 md:pt-20">
       <div className="mx-auto flex max-w-2xl flex-col gap-4">
         <h1 className="font-serif text-4xl font-extrabold tracking-tight text-gray-900 dark:text-gray-100 sm:text-5xl lg:text-6xl">
           Notes
@@ -37,7 +30,7 @@ const Page = async () => {
         </div>
 
         <div className="mx-auto grid max-w-2xl gap-6 lg:max-w-5xl lg:grid-cols-2">
-          {data
+          {notes
             .filter(({ published }) => !published)
             .map(({ title, description, slug }) => (
               <InfoCard
@@ -64,7 +57,7 @@ const Page = async () => {
         </div>
 
         <div className="mx-auto grid max-w-2xl gap-6 lg:max-w-5xl lg:grid-cols-2">
-          {data
+          {notes
             .filter(({ published }) => published)
             .sort((a, b) => b.published - a.published)
             .map(({ title, description, slug, published }) => (
