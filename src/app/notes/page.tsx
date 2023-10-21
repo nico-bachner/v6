@@ -1,5 +1,7 @@
-import { InfoCard } from '@/components/ui/InfoCard'
+import Link from 'next/link'
+
 import { fetchNotes } from '@/lib/fetchNotes'
+import { cn } from '@/utils/cn'
 
 const Page = async () => {
   const notes = await fetchNotes()
@@ -33,12 +35,23 @@ const Page = async () => {
           {notes
             .filter(({ published }) => !published)
             .map(({ title, description, slug }) => (
-              <InfoCard
+              <Link
                 key={slug}
-                href={slug}
-                header={title}
-                body={description}
-              />
+                href={`/${slug}`}
+                className={cn(
+                  'bg-white/5 shadow backdrop-blur',
+                  'transition hover:bg-white/10 hover:shadow-lg hover:backdrop-blur-lg',
+                  'relative flex flex-col gap-2 rounded-lg p-8 sm:gap-3 sm:p-10 lg:gap-4 lg:p-12',
+                )}
+              >
+                <p className="text-xl tracking-tight sm:text-2xl lg:text-3xl">
+                  <strong className="font-extrabold">{title}</strong>
+                </p>
+
+                <p className="prose line-clamp-2 dark:prose-invert sm:prose-lg lg:prose-xl">
+                  {description}
+                </p>
+              </Link>
             ))}
         </div>
       </div>
@@ -61,13 +74,34 @@ const Page = async () => {
             .filter(({ published }) => published)
             .sort((a, b) => b.published - a.published)
             .map(({ title, description, slug, published }) => (
-              <InfoCard
+              <Link
                 key={slug}
-                href={slug}
-                header={title}
-                body={description}
-                info={new Date(published).toLocaleDateString()}
-              />
+                href={`/${slug}`}
+                className={cn(
+                  'bg-white/5 shadow backdrop-blur',
+                  'transition hover:bg-white/10 hover:shadow-lg hover:backdrop-blur-lg',
+                  'relative flex flex-col gap-2 rounded-lg p-8 sm:gap-3 sm:p-10 lg:gap-4 lg:p-12',
+                )}
+              >
+                <p className="text-xl tracking-tight sm:text-2xl lg:text-3xl">
+                  <strong className="font-extrabold">{title}</strong>
+                </p>
+
+                <p className="prose line-clamp-2 dark:prose-invert sm:prose-lg lg:prose-xl">
+                  {description}
+                </p>
+
+                <div
+                  className={cn(
+                    'bg-white/5 shadow backdrop-blur',
+                    'absolute -right-3 -top-3 rounded px-4 py-2',
+                  )}
+                >
+                  <p className="text-sm font-light text-gray-500 sm:text-base lg:text-lg">
+                    {new Date(published).toLocaleDateString('en-AU')}
+                  </p>
+                </div>
+              </Link>
             ))}
         </div>
       </div>

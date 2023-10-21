@@ -136,7 +136,7 @@ const Template: React.FC<{ children: React.ReactNode }> = ({ children }) => {
               className="flex items-center gap-2 rounded border px-4 py-2"
             >
               <GitHubIcon className="h-5 w-5" />
-              <span className="">Edit on GitHub</span>
+              <span>Edit on GitHub</span>
             </a>
           </div>
         </div>

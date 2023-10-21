@@ -1,5 +1,7 @@
-import { InfoCard } from '@/components/ui/InfoCard'
+import Link from 'next/link'
+
 import { fetchProjects } from '@/lib/fetchProjects'
+import { cn } from '@/utils/cn'
 
 const Page = async () => {
   const projects = await fetchProjects()
@@ -37,14 +39,34 @@ const Page = async () => {
 
       <div className="mx-auto grid max-w-5xl grid-cols-1 gap-y-8 md:grid-cols-3 lg:gap-x-40">
         {projects.map(({ title, description, slug, from, to }) => (
-          <InfoCard
+          <Link
             key={slug}
-            href={slug}
-            header={title}
-            body={description}
-            info={getPeriod(from, to)}
-            className="md:col-span-2 md:odd:col-start-1 md:even:col-start-2"
-          />
+            href={`/${slug}`}
+            className={cn(
+              'bg-white/5 shadow backdrop-blur',
+              'transition hover:bg-white/10 hover:shadow-lg hover:backdrop-blur-lg',
+              'relative flex flex-col gap-2 rounded-lg p-8 sm:gap-3 sm:p-10 lg:gap-4 lg:p-12',
+              'md:col-span-2 md:odd:col-start-1 md:even:col-start-2',
+            )}
+          >
+            <p className="text-xl tracking-tight sm:text-2xl lg:text-3xl">
+              <strong className="font-extrabold">{title}</strong>
+            </p>
+            <p className="prose line-clamp-2 dark:prose-invert sm:prose-lg lg:prose-xl">
+              {description}
+            </p>
+
+            <div
+              className={cn(
+                'bg-white/5 shadow backdrop-blur',
+                'absolute -right-3 -top-3 rounded px-4 py-2',
+              )}
+            >
+              <p className="text-sm font-light text-gray-500 sm:text-base lg:text-lg">
+                {getPeriod(from, to)}
+              </p>
+            </div>
+          </Link>
         ))}
       </div>
     </main>
