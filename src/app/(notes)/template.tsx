@@ -3,50 +3,19 @@
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline'
 import Link from 'next/link'
 import { useSelectedLayoutSegment } from 'next/navigation'
-import { useEffect, useState } from 'react'
 
 import { Back } from '@/components/ui/Back'
+import { useCommits } from '@/hooks/useCommits'
+import { useNotes } from '@/hooks/useNotes'
 import { GitHubIcon } from '@/icons/GitHub'
-import { fetchCommits } from '@/lib/fetchCommits'
-import type { Note } from '@/types/note'
 
 const Template: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [notes, setNotes] = useState<Note[]>()
-  const [lastUpdated, setLastUpdated] = useState<Date>()
   const selectedLayoutSegment = useSelectedLayoutSegment()
-
-  useEffect(() => {
-    const fetchNotes = async () => {
-      const res = await fetch('/api/notes')
-      const notes = await res.json()
-
-      setNotes(notes)
-    }
-
-    const fetchLastUpdated = async () => {
-      const [lastCommit] = await fetchCommits(
-        `src/app/(notes)/${selectedLayoutSegment}/page.mdx`,
-      )
-
-      setLastUpdated(new Date(lastCommit.commit.author.date))
-    }
-
-    fetchNotes()
-    fetchLastUpdated()
-  }, [selectedLayoutSegment])
+  const notes = useNotes()
+  const commits = useCommits('src/app/(notes)/')
 
   if (!notes) {
-    return (
-      <div className="p-6">
-        <Back href="/notes" />
-
-        <main className="mx-auto flex max-w-2xl flex-col gap-8">
-          <article className="prose dark:prose-invert sm:prose-lg lg:prose-xl">
-            {children}
-          </article>
-        </main>
-      </div>
-    )
+    return <></>
   }
 
   const note = notes.find(({ slug }) => slug == selectedLayoutSegment)
@@ -83,7 +52,12 @@ const Template: React.FC<{ children: React.ReactNode }> = ({ children }) => {
           </div>
 
           <div className="flex justify-between text-sm font-light text-gray-500 sm:text-base lg:text-lg">
-            <p>Last Updated: {lastUpdated?.toLocaleDateString() ?? 'Never'}</p>
+            <p>
+              Last Updated:{' '}
+              {commits
+                ? new Date(commits[0].commit.author.date).toLocaleDateString()
+                : 'Never'}
+            </p>
             <p>
               {readingTime[0] == readingTime[1]
                 ? readingTime[0]

@@ -1,4 +1,4 @@
-export const Icon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
+export const NBIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
   <svg
     viewBox="0 0 24 24"
     fill="none"

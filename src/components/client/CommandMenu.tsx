@@ -4,14 +4,15 @@ import {
   ClipboardIcon,
   CodeBracketIcon,
   ComputerDesktopIcon,
+  DocumentDuplicateIcon,
+  DocumentIcon,
   EnvelopeIcon,
-  HomeModernIcon,
   MagnifyingGlassIcon,
   MoonIcon,
-  PencilIcon,
+  Square2StackIcon,
+  StopIcon,
   SunIcon,
   UserIcon,
-  WrenchIcon,
 } from '@heroicons/react/24/outline'
 import { useHotkeys } from '@mantine/hooks'
 import { Command } from 'cmdk'
@@ -20,9 +21,12 @@ import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 
 import { Dialog } from '@/components/client/Dialog'
+import { useNotes } from '@/hooks/useNotes'
+import { useProjects } from '@/hooks/useProjects'
 import { CommandIcon } from '@/icons/Command'
 import { GitHubIcon } from '@/icons/GitHub'
 import { LinkedInIcon } from '@/icons/LinkedIn'
+import { NBIcon } from '@/icons/NB'
 import { cn } from '@/utils/cn'
 
 import { KeyboardShortcut } from '../ui/KeyboardShortcut'
@@ -33,6 +37,8 @@ export const CommandMenu = () => {
   const [tabs, setTabs] = useState(['Home'])
   const { theme, setTheme } = useTheme()
   const router = useRouter()
+  const projects = useProjects()
+  const notes = useNotes()
 
   type Item = {
     id: string
@@ -40,15 +46,15 @@ export const CommandMenu = () => {
     title: string
     group: string
     shortcut?: string
-    action: () => void
+    action?: () => void
     children?: Item[]
   }
 
   const items: Item[] = [
     {
-      id: 'Home',
-      icon: HomeModernIcon,
-      title: 'Go Home',
+      id: 'Front Page',
+      icon: NBIcon,
+      title: 'Go to Front Page',
       group: 'Navigation',
       shortcut: 'ctrl+1',
       action: () => {
@@ -57,7 +63,7 @@ export const CommandMenu = () => {
     },
     {
       id: 'Projects',
-      icon: WrenchIcon,
+      icon: Square2StackIcon,
       title: 'Browse Projects',
       group: 'Navigation',
       shortcut: 'ctrl+2',
@@ -66,14 +72,44 @@ export const CommandMenu = () => {
       },
     },
     {
+      id: 'Search Projects',
+      icon: StopIcon,
+      title: 'Search Projects...',
+      group: 'Navigation',
+      children: projects?.map(({ title, slug }) => ({
+        id: title,
+        icon: StopIcon,
+        title: title,
+        group: 'Projects',
+        action: () => {
+          router.push(`/${slug}`)
+        },
+      })),
+    },
+    {
       id: 'Notes',
-      icon: PencilIcon,
-      title: 'Read Notes',
+      icon: DocumentDuplicateIcon,
+      title: 'Browse Notes',
       group: 'Navigation',
       shortcut: 'ctrl+3',
       action: () => {
         router.push('/notes')
       },
+    },
+    {
+      id: 'Search Notes',
+      icon: DocumentIcon,
+      title: 'Search Notes...',
+      group: 'Navigation',
+      children: notes?.map(({ title, slug }) => ({
+        id: title,
+        icon: DocumentIcon,
+        title: title,
+        group: 'Notes',
+        action: () => {
+          router.push(`/${slug}`)
+        },
+      })),
     },
     {
       id: 'Email',
@@ -122,10 +158,6 @@ export const CommandMenu = () => {
       title: 'Change Theme...',
       group: 'Settings',
       shortcut: 'ctrl+t',
-      action: () => {
-        setOpen(true)
-        setTabs(['Home', 'Theme'])
-      },
       children: [
         {
           id: 'Light Theme',
@@ -178,14 +210,27 @@ export const CommandMenu = () => {
     },
   ]
 
-  useHotkeys([
-    ['mod+k', () => setOpen(!open)],
-    ...items
-      .filter(({ shortcut }) => shortcut)
-      .map(
-        ({ shortcut, action }) => [shortcut, action] as [string, () => void],
-      ),
-  ])
+  const getAllShortcuts = (items: Item[]) => {
+    const shortcuts: [string, () => void][] = []
+
+    const getShortcuts = (items: Item[]) => {
+      items.forEach(({ shortcut, action, children }) => {
+        if (shortcut && action) {
+          shortcuts.push([shortcut, action])
+        }
+
+        if (children) {
+          getShortcuts(children)
+        }
+      })
+    }
+
+    getShortcuts(items)
+
+    return shortcuts
+  }
+
+  useHotkeys([['mod+k', () => setOpen(!open)], ...getAllShortcuts(items)])
 
   const currentTabItems =
     items.find(({ id }) => tabs[tabs.length - 1] == id)?.children ?? items
@@ -235,7 +280,7 @@ export const CommandMenu = () => {
                     }}
                     className={cn(
                       'bg-white/5 shadow backdrop-blur',
-                      'rounded px-2 py-0.5 text-sm text-gray-700 dark:text-gray-300',
+                      'py-0.5 rounded px-2 text-sm text-gray-700 dark:text-gray-300',
                     )}
                   >
                     {tab}
@@ -262,27 +307,43 @@ export const CommandMenu = () => {
                 <Command.Group key={group} heading={group}>
                   {currentTabItems
                     .filter((option) => option.group == group)
-                    .map(({ id, icon: Icon, title, shortcut, action }) => (
-                      <Command.Item
-                        key={id}
-                        value={id}
-                        onSelect={() => {
-                          setOpen(false)
-                          setTabs(tabs.slice(0, tabs.length - 1))
-                          action()
-                        }}
-                        className={cn(
-                          'data-[selected=true]:backdrop-blur-sm data-[selected=true]:bg-white/5 data-[selected=true]:shadow',
-                          'flex cursor-pointer items-center gap-4 rounded p-3',
-                        )}
-                      >
-                        <Icon className="box-content h-6 w-6" />
-                        <span className="flex-1">{title}</span>
-                        {shortcut ? (
-                          <KeyboardShortcut shortcut={shortcut} />
-                        ) : null}
-                      </Command.Item>
-                    ))}
+                    .map(
+                      ({
+                        id,
+                        icon: Icon,
+                        title,
+                        shortcut,
+                        action,
+                        children,
+                      }) => (
+                        <Command.Item
+                          key={id}
+                          value={id}
+                          onSelect={() => {
+                            if (children) {
+                              setTabs([...tabs, id])
+                            } else {
+                              setOpen(false)
+                              setTabs(['Home'])
+
+                              if (action) {
+                                action()
+                              }
+                            }
+                          }}
+                          className={cn(
+                            'data-[selected=true]:backdrop-blur-sm data-[selected=true]:bg-white/5 data-[selected=true]:shadow',
+                            'flex cursor-pointer items-center gap-4 rounded p-3',
+                          )}
+                        >
+                          <Icon className="box-content h-6 w-6" />
+                          <span className="flex-1">{title}</span>
+                          {shortcut ? (
+                            <KeyboardShortcut shortcut={shortcut} />
+                          ) : null}
+                        </Command.Item>
+                      ),
+                    )}
                 </Command.Group>
               ))}
           </Command.List>

@@ -62,19 +62,3 @@ export type Commit = {
   committer: Author
   parents: Parent[]
 }
-
-/**
- * Asynchronously fetches the commit history of a specified file in a GitHub repo.
- *
- * @param path
- * Path to the page from the root directory of the repository.
- * Example: `src/app/page.tsx`
- */
-export const fetchCommits = async (path: string) => {
-  const res = await fetch(
-    `https://api.github.com/repos/nico-bachner/v6/commits?path=${path}`,
-  )
-  const commits: Commit[] = await res.json()
-
-  return commits
-}
