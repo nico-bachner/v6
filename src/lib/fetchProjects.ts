@@ -1,18 +1,19 @@
 import { promises as fs } from 'fs'
 
-import { fetchMDXData } from '@/lib/fetchMDXData'
+import { fetchProject } from '@/lib/fetchProject'
 
 export const fetchProjects = async () => {
   const routes = await fs.readdir(`${process.cwd()}/src/app/(projects)`)
-  const data = await Promise.all(
+
+  const projects = await Promise.all(
     routes
       .filter((route) => !route.includes('.tsx'))
-      .map(async (slug) => await fetchMDXData(`src/app/(projects)`, slug)),
+      .map(async (slug) => await fetchProject(slug)),
   )
 
-  const projects = data.sort((a, b) => {
+  return projects.sort((a, b) => {
     if (a.to && b.to) {
-      return b.to - a.to
+      return b.to.getTime() - a.to.getTime()
     }
 
     if (a.to) {
@@ -23,8 +24,6 @@ export const fetchProjects = async () => {
       return -1
     }
 
-    return b.from - a.from
+    return b.from.getTime() - a.from.getTime()
   })
-
-  return projects
 }

@@ -72,7 +72,7 @@ const Page = async () => {
         <div className="mx-auto grid max-w-2xl gap-6 lg:max-w-5xl lg:grid-cols-2">
           {notes
             .filter(({ published }) => published)
-            .sort((a, b) => b.published - a.published)
+            .sort((a, b) => b.published!.getTime() - a.published!.getTime())
             .map(({ title, description, slug, published }) => (
               <Link
                 key={slug}
@@ -80,7 +80,7 @@ const Page = async () => {
                 className={cn(
                   'bg-white/5 shadow backdrop-blur',
                   'transition hover:bg-white/10 hover:shadow-lg hover:backdrop-blur-lg',
-                  'relative flex flex-col gap-2 rounded-lg p-8 sm:gap-3 sm:p-10 lg:gap-4 lg:p-12',
+                  'relative flex flex-col justify-center gap-2 rounded-lg p-8 sm:gap-3 sm:p-10 lg:gap-4 lg:p-12',
                 )}
               >
                 <p className="text-xl tracking-tight sm:text-2xl lg:text-3xl">
@@ -98,7 +98,7 @@ const Page = async () => {
                   )}
                 >
                   <p className="text-sm font-light text-gray-500 sm:text-base lg:text-lg">
-                    {new Date(published).toLocaleDateString('en-AU')}
+                    {published!.toLocaleDateString('en-AU')}
                   </p>
                 </div>
               </Link>

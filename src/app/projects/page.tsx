@@ -6,11 +6,11 @@ import { cn } from '@/utils/cn'
 const Page = async () => {
   const projects = await fetchProjects()
 
-  const getPeriod = (from: number, to: number | null) => {
-    const from_year = new Date(from).getFullYear()
+  const getPeriod = (from: Date, to: Date | undefined) => {
+    const from_year = from.getFullYear()
 
     if (to) {
-      const to_year = new Date(to).getFullYear()
+      const to_year = to.getFullYear()
 
       if (to_year == from_year) {
         return to_year.toString()

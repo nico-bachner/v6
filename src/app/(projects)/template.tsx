@@ -7,15 +7,8 @@ import { useEffect, useState } from 'react'
 
 import { Back } from '@/components/ui/Back'
 import { GitHubIcon } from '@/icons/GitHub'
-
-type Project = {
-  slug: string
-  title: string
-  description: string
-  from: Date
-  to: Date
-  content: string
-}
+import { fetchCommits } from '@/lib/fetchCommits'
+import type { Project } from '@/types/project'
 
 const Template: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [projects, setProjects] = useState<Project[]>()
@@ -31,15 +24,11 @@ const Template: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     }
 
     const fetchLastUpdated = async () => {
-      const res = await fetch(
-        `https://api.github.com/repos/nico-bachner/v6/commits?path=src/app/(projects)/${selectedLayoutSegment}/page.mdx`,
+      const [lastCommit] = await fetchCommits(
+        `src/app/(notes)/${selectedLayoutSegment}/page.mdx`,
       )
-      const commitHistory = await res.json()
-      const latestCommit = commitHistory[0]
 
-      if (latestCommit) {
-        setLastUpdated(new Date(latestCommit.commit.author.date))
-      }
+      setLastUpdated(new Date(lastCommit.commit.author.date))
     }
 
     fetchProjects()
@@ -47,7 +36,17 @@ const Template: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   }, [selectedLayoutSegment])
 
   if (!projects) {
-    return <></>
+    return (
+      <div className="p-6">
+        <Back href="/projects" />
+
+        <main className="mx-auto flex max-w-2xl flex-col gap-8">
+          <article className="prose dark:prose-invert sm:prose-lg lg:prose-xl">
+            {children}
+          </article>
+        </main>
+      </div>
+    )
   }
 
   const project = projects.find(({ slug }) => slug == selectedLayoutSegment)
