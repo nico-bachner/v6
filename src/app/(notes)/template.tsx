@@ -54,7 +54,7 @@ const Template: React.FC<{ children: React.ReactNode }> = ({ children }) => {
           <div className="flex justify-between text-sm font-light text-gray-500 sm:text-base lg:text-lg">
             <p>
               Last Updated:{' '}
-              {commits
+              {commits && commits[0]
                 ? new Date(commits[0].commit.author.date).toLocaleDateString()
                 : 'Never'}
             </p>

@@ -22,6 +22,7 @@ const serif = Fraunces({
 export const metadata: Metadata = {
   title: 'Nico Bachner',
   description: 'Student. Developer. Entrepreneur.',
+  metadataBase: new URL('https://nicobachner.com'),
 }
 
 const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => (
