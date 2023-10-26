@@ -1,26 +1,54 @@
 ---
 title: Synthwave
-description: A collection of music of the synthwave genre
+description: A collection of music from the synthwave genre
 ---
 
 In the hotly debated topic of which genre is the best programming music, synthwave is an underrated choice. It caters to the senses through beautiful melodies, while not being distracting thanks to its repetitiveness and lack (mostly) of vocals.
 
-Not only is syntwave suited for focused work, but through its reimagining of 80's optimism for the future, it can also inspire us.
+Not only is synthwave suited for focused work, but through its reimagining of 80's optimism for the future, it can also inspire us.
 
 import { Artists, Countries } from './components/artists'
 import { Lyrics, NoLyrics } from './components/tracks'
 
 ## Artists
 
+### Data
+
 Here is my collection of synthwave artists, grouped and sorted by their country of origin.
 
 <Artists />
 
-I find it interesting to see where the innovation hotspots are when it comes to the composition of new synthwave tracks. So far, there have been 3 cities that house a significant proportion of the world's synthwave artists, namely Nice (France), Stockholm (Sweden) and Pittsburgh (PA, USA). Other notable locations are Melbourne, Montreal and Copenhagen
+I find it interesting to see where the innovation hotspots are when it comes to the composition of new synthwave tracks. So far, there have been 3 cities that house a significant proportion of the world's synthwave artists, namely Lyon, Stockholm and Pittsburgh. Other notable locations include Melbourne, Montreal and Copenhagen
 
 <Countries />
 
+### API Usage
+
+The data is freely available to use by fetching it from the api.
+
+```sh
+curl 'https://nicobachner.com/api/synthwave/artists'
+```
+
+### Response Type
+
+| Field     | Type                |
+| --------- | ------------------- |
+| `name`    | String              |
+| `country` | String or Undefined |
+
+### Example
+
+```json
+{
+  "name": "Wice",
+  "country": "Denmark"
+}
+```
+
 ## Tracks
+
+### Data
 
 A collection of my favourite synthwave tracks. Sorted by release date.
 
@@ -31,6 +59,34 @@ No lyrics:
 With lyrics:
 
 <Lyrics />
+
+### API Usage
+
+The data is freely available to use by fetching it from the api.
+
+```sh
+curl 'https://nicobachner.com/api/synthwave/tracks'
+```
+
+### Response Type
+
+| Field     | Type             |
+| --------- | ---------------- |
+| `title`   | String           |
+| `artists` | Array of Strings |
+| `year`    | Integer          |
+| `lyrics`  | Boolean          |
+
+### Example
+
+```json
+{
+  "title": "AWAKENING",
+  "artists": ["ALEX", "TOKYO ROSE", "F.O.O.L"],
+  "year": 2020,
+  "lyrics": false
+}
+```
 
 ## Resources
 
