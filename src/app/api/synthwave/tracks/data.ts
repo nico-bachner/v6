@@ -39,7 +39,7 @@ export const tracks: Track[] = [
   },
   {
     title: 'Bonzai',
-    artists: ['Turbo Knight'],
+    artists: ['Turbo Knight', 'Dimi Kaye'],
     year: 2019,
     lyrics: false,
   },
@@ -95,6 +95,12 @@ export const tracks: Track[] = [
     title: 'Delete Soul',
     artists: ['ALEX', 'TOKYO ROSE'],
     year: 2017,
+    lyrics: false,
+  },
+  {
+    title: 'Departure',
+    artists: ['Waveshaper'],
+    year: 2019,
     lyrics: false,
   },
   {
@@ -206,6 +212,12 @@ export const tracks: Track[] = [
     lyrics: true,
   },
   {
+    title: 'The Guardian',
+    artists: ['Waveshaper'],
+    year: 2019,
+    lyrics: false,
+  },
+  {
     title: 'Hearts',
     artists: ['Waveshaper'],
     year: 2023,
@@ -281,6 +293,12 @@ export const tracks: Track[] = [
     title: 'Overdog',
     artists: ['Le Matos'],
     year: 2013,
+    lyrics: false,
+  },
+  {
+    title: 'Phantom',
+    artists: ['Turboslash'],
+    year: 2020,
     lyrics: false,
   },
   {

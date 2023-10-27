@@ -3,28 +3,41 @@ import type { NextRequest } from 'next/server'
 
 import { tracks } from './data'
 
-export const GET = async (request: NextRequest) => {
-  const lyrics = request.nextUrl.searchParams.get('lyrics')
+export const GET = async ({ nextUrl }: NextRequest) => {
+  const lyrics = nextUrl.searchParams.get('lyrics')
 
-  if (lyrics == 'true') {
-    return new NextResponse(
-      JSON.stringify(
-        tracks.filter(({ lyrics }) => lyrics == true),
-        null,
-        2,
-      ),
+  if (lyrics && !(lyrics == 'true' || lyrics == 'false')) {
+    return NextResponse.json(
+      { error: "'lyrics' must be a boolean" },
+      { status: 400 },
     )
   }
 
-  if (lyrics == 'false') {
-    return new NextResponse(
-      JSON.stringify(
-        tracks.filter(({ lyrics }) => lyrics == false),
-        null,
-        2,
-      ),
-    )
-  }
+  return new NextResponse(
+    JSON.stringify(
+      tracks
+        .filter(({ lyrics }) => {
+          if (nextUrl.searchParams.get('lyrics') == 'true') {
+            return lyrics == true
+          }
 
-  return new NextResponse(JSON.stringify(tracks, null, 2))
+          if (nextUrl.searchParams.get('lyrics') == 'false') {
+            return lyrics == false
+          }
+
+          return true
+        })
+        .filter(({ artists }) => {
+          const artist = nextUrl.searchParams.get('artist')
+
+          if (artist) {
+            return artists.includes(artist)
+          }
+
+          return true
+        }),
+      null,
+      2,
+    ),
+  )
 }

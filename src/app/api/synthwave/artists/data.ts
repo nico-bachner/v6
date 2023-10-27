@@ -132,6 +132,10 @@ export const artists: Artist[] = [
     country: 'Finland',
   },
   {
+    name: 'Turboslash',
+    country: 'USA',
+  },
+  {
     name: 'Volkor X',
   },
   {

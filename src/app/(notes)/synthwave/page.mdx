@@ -30,6 +30,20 @@ The data is freely available to use by fetching it from the api.
 curl 'https://nicobachner.com/api/synthwave/artists'
 ```
 
+**Parameters:**
+
+Optional parameters to narrow down the dataset.
+
+| Parameter | Type   |
+| --------- | ------ |
+| `country` | String |
+
+**Example:**
+
+```sh
+curl 'https://nicobachner.com/api/synthwave/artists?country=France'
+```
+
 **Response:**
 
 | Field     | Type                |
@@ -75,11 +89,12 @@ Optional parameters to narrow down the dataset.
 | Parameter | Type    |
 | --------- | ------- |
 | `lyrics`  | Boolean |
+| `artist`  | String  |
 
 **Example:**
 
 ```sh
-curl 'https://nicobachner.com/api/synthwave/tracks?lyrics=false'
+curl 'https://nicobachner.com/api/synthwave/tracks?lyrics=false&artist=Neon%20Nox'
 ```
 
 **Response:**
