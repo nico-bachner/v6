@@ -50,6 +50,12 @@ export const tracks: Track[] = [
     lyrics: false,
   },
   {
+    title: 'Burn Inside',
+    artists: ['Donbor'],
+    year: 2018,
+    lyrics: false,
+  },
+  {
     title: 'Cabin Fever in Space',
     artists: ['Waveshaper'],
     year: 2014,
@@ -203,6 +209,12 @@ export const tracks: Track[] = [
     title: 'Hearts',
     artists: ['Waveshaper'],
     year: 2023,
+    lyrics: false,
+  },
+  {
+    title: 'Highway',
+    artists: ['F.O.O.L'],
+    year: 2018,
     lyrics: false,
   },
   {
