@@ -3,16 +3,14 @@ title: Synthwave
 description: A collection of music from the synthwave genre
 ---
 
+import { Artists, Countries } from './components/artists'
+import { Tracks } from './components/tracks'
+
 In the hotly debated topic of which genre is the best programming music, synthwave is an underrated choice. It caters to the senses through beautiful melodies, while not being distracting thanks to its repetitiveness and lack (mostly) of vocals.
 
 Not only is synthwave suited for focused work, but through its reimagining of 80's optimism for the future, it can also inspire us.
 
-import { Artists, Countries } from './components/artists'
-import { Lyrics, NoLyrics } from './components/tracks'
-
 ## Artists
-
-### Data
 
 Here is my collection of synthwave artists, grouped and sorted by their country of origin.
 
@@ -22,100 +20,11 @@ I find it interesting to see where the innovation hotspots are when it comes to 
 
 <Countries />
 
-### API Usage
-
-The data is freely available to use by fetching it from the api.
-
-```sh
-curl 'https://nicobachner.com/api/synthwave/artists'
-```
-
-**Parameters:**
-
-Optional parameters to narrow down the dataset.
-
-| Parameter | Type   |
-| --------- | ------ |
-| `country` | String |
-
-**Example:**
-
-```sh
-curl 'https://nicobachner.com/api/synthwave/artists?country=France'
-```
-
-**Response:**
-
-| Field     | Type                |
-| --------- | ------------------- |
-| `name`    | String              |
-| `country` | String or Undefined |
-
-**Example:**
-
-```json
-{
-  "name": "Wice",
-  "country": "Denmark"
-}
-```
-
 ## Tracks
 
-### Data
+A collection of my favourite synthwave tracks. Sorted by release year.
 
-A collection of my favourite synthwave tracks. Sorted by release date.
-
-No lyrics:
-
-<NoLyrics />
-
-With lyrics:
-
-<Lyrics />
-
-### API Usage
-
-The data is freely available to use by fetching it from the api.
-
-```sh
-curl 'https://nicobachner.com/api/synthwave/tracks'
-```
-
-**Parameters:**
-
-Optional parameters to narrow down the dataset.
-
-| Parameter | Type    |
-| --------- | ------- |
-| `lyrics`  | Boolean |
-| `artist`  | String  |
-
-**Example:**
-
-```sh
-curl 'https://nicobachner.com/api/synthwave/tracks?lyrics=false&artist=Neon%20Nox'
-```
-
-**Response:**
-
-| Field     | Type             |
-| --------- | ---------------- |
-| `title`   | String           |
-| `artists` | Array of Strings |
-| `year`    | Integer          |
-| `lyrics`  | Boolean          |
-
-**Example:**
-
-```json
-{
-  "title": "AWAKENING",
-  "artists": ["ALEX", "TOKYO ROSE", "F.O.O.L"],
-  "year": 2020,
-  "lyrics": false
-}
-```
+<Tracks />
 
 ## Resources
 

@@ -1,0 +1,88 @@
+---
+title: Synthwave Wiki
+description: A collection of music from the synthwave genre
+from: 2023-10-01
+---
+
+https://synthwave.wiki
+
+## API Usage
+
+The data is freely available to use by fetching it from the api.
+
+### Artists
+
+```sh
+curl 'https://synthwave.wiki/api/artists'
+```
+
+**Parameters:**
+
+Optional parameters to narrow down the dataset.
+
+| Parameter | Type   |
+| --------- | ------ |
+| `country` | String |
+
+**Example:**
+
+```sh
+curl 'https://synthwave.wiki/api/artists?country=France'
+```
+
+**Response:**
+
+| Field     | Type                |
+| --------- | ------------------- |
+| `name`    | String              |
+| `country` | String or Undefined |
+
+**Example:**
+
+```json
+{
+  "name": "Wice",
+  "country": "Denmark"
+}
+```
+
+### Tracks
+
+```sh
+curl 'https://synthwave.wiki/api/tracks'
+```
+
+**Parameters:**
+
+Optional parameters to narrow down the dataset.
+
+| Parameter | Type    |
+| --------- | ------- |
+| `lyrics`  | Boolean |
+| `artist`  | String  |
+
+**Example:**
+
+```sh
+curl 'https://synthwave.wiki/api/tracks?lyrics=false&artist=Neon%20Nox'
+```
+
+**Response:**
+
+| Field     | Type             |
+| --------- | ---------------- |
+| `title`   | String           |
+| `artists` | Array of Strings |
+| `year`    | Integer          |
+| `lyrics`  | Boolean          |
+
+**Example:**
+
+```json
+{
+  "title": "AWAKENING",
+  "artists": ["ALEX", "TOKYO ROSE", "F.O.O.L"],
+  "year": 2020,
+  "lyrics": false
+}
+```
