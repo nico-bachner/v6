@@ -64,52 +64,68 @@ export const CommandMenu = () => {
     {
       id: 'Projects',
       icon: Square2StackIcon,
-      title: 'Browse Projects',
+      title: 'Projects',
       group: 'Navigation',
-      shortcut: 'ctrl+2',
-      action: () => {
-        router.push('/projects')
-      },
-    },
-    {
-      id: 'Search Projects',
-      icon: StopIcon,
-      title: 'Search Projects...',
-      group: 'Navigation',
-      children: projects?.map(({ title, slug }) => ({
-        id: title,
-        icon: StopIcon,
-        title: title,
-        group: 'Projects',
-        action: () => {
-          router.push(`/${slug}`)
+      children: [
+        {
+          id: 'Browse Projects',
+          icon: Square2StackIcon,
+          title: 'Browse Projects',
+          group: 'Navigation',
+          shortcut: 'ctrl+2',
+          action: () => {
+            router.push('/projects')
+          },
         },
-      })),
+        {
+          id: 'Search Projects',
+          icon: MagnifyingGlassIcon,
+          title: 'Search Projects',
+          group: 'Navigation',
+          children: projects?.map(({ title, slug }) => ({
+            id: title,
+            icon: StopIcon,
+            title: title,
+            group: 'Projects',
+            action: () => {
+              router.push(`/${slug}`)
+            },
+          })),
+        },
+      ],
     },
     {
       id: 'Notes',
       icon: DocumentDuplicateIcon,
       title: 'Browse Notes',
       group: 'Navigation',
-      shortcut: 'ctrl+3',
-      action: () => {
-        router.push('/notes')
-      },
-    },
-    {
-      id: 'Search Notes',
-      icon: DocumentIcon,
-      title: 'Search Notes...',
-      group: 'Navigation',
-      children: notes?.map(({ title, slug }) => ({
-        id: title,
-        icon: DocumentIcon,
-        title: title,
-        group: 'Notes',
-        action: () => {
-          router.push(`/${slug}`)
+      children: [
+        {
+          id: 'Browse Notes',
+          icon: DocumentDuplicateIcon,
+          title: 'Browse Notes',
+          group: 'Navigation',
+          shortcut: 'ctrl+3',
+          action: () => {
+            router.push('/notes')
+          },
         },
-      })),
+        {
+          id: 'Search Notes',
+          icon: DocumentIcon,
+          title: 'Search Notes',
+          group: 'Navigation',
+          children: notes?.map(({ title, slug }) => ({
+            id: title,
+            icon: DocumentIcon,
+            title: title,
+            group: 'Notes',
+            action: () => {
+              router.push(`/${slug}`)
+            },
+          })),
+        },
+      ],
     },
     {
       id: 'Email',
@@ -153,9 +169,9 @@ export const CommandMenu = () => {
         theme == 'light'
           ? SunIcon
           : theme == 'dark'
-          ? MoonIcon
-          : ComputerDesktopIcon,
-      title: 'Change Theme...',
+            ? MoonIcon
+            : ComputerDesktopIcon,
+      title: 'Change Theme',
       group: 'Settings',
       shortcut: 'ctrl+t',
       children: [
@@ -232,8 +248,24 @@ export const CommandMenu = () => {
 
   useHotkeys([['mod+k', () => setOpen(!open)], ...getAllShortcuts(items)])
 
+  const allItems: Item[] = []
+
+  const getAllItems = (items: Item[]) => {
+    items.forEach((item) => {
+      allItems.push(item)
+
+      if (item.children) {
+        getAllItems(item.children)
+      }
+    })
+
+    return items
+  }
+
+  getAllItems(items)
+
   const currentTabItems =
-    items.find(({ id }) => tabs[tabs.length - 1] == id)?.children ?? items
+    allItems.find(({ id }) => tabs[tabs.length - 1] == id)?.children ?? items
 
   return (
     <>
