@@ -52,6 +52,47 @@ export const CommandMenu = () => {
 
   const items: Item[] = [
     {
+      id: 'Theme',
+      icon:
+        theme == 'light'
+          ? SunIcon
+          : theme == 'dark'
+            ? MoonIcon
+            : ComputerDesktopIcon,
+      title: 'Change Theme',
+      group: 'Settings',
+      shortcut: 'ctrl+t',
+      children: [
+        {
+          id: 'Light Theme',
+          icon: SunIcon,
+          title: 'Change Theme to Light',
+          group: 'settings',
+          action: () => {
+            setTheme('light')
+          },
+        },
+        {
+          id: 'Dark Theme',
+          icon: MoonIcon,
+          title: 'Change Theme to Dark',
+          group: 'settings',
+          action: () => {
+            setTheme('dark')
+          },
+        },
+        {
+          id: 'System Theme',
+          icon: ComputerDesktopIcon,
+          title: 'Change Theme to System',
+          group: 'settings',
+          action: () => {
+            setTheme('system')
+          },
+        },
+      ],
+    },
+    {
       id: 'Front Page',
       icon: NBIcon,
       title: 'Go to Front Page',
@@ -162,47 +203,6 @@ export const CommandMenu = () => {
       action: () => {
         window.open('https://github.com/nico-bachner')
       },
-    },
-    {
-      id: 'Theme',
-      icon:
-        theme == 'light'
-          ? SunIcon
-          : theme == 'dark'
-            ? MoonIcon
-            : ComputerDesktopIcon,
-      title: 'Change Theme',
-      group: 'Settings',
-      shortcut: 'ctrl+t',
-      children: [
-        {
-          id: 'Light Theme',
-          icon: SunIcon,
-          title: 'Change Theme to Light',
-          group: 'settings',
-          action: () => {
-            setTheme('light')
-          },
-        },
-        {
-          id: 'Dark Theme',
-          icon: MoonIcon,
-          title: 'Change Theme to Dark',
-          group: 'settings',
-          action: () => {
-            setTheme('dark')
-          },
-        },
-        {
-          id: 'System Theme',
-          icon: ComputerDesktopIcon,
-          title: 'Change Theme to System',
-          group: 'settings',
-          action: () => {
-            setTheme('system')
-          },
-        },
-      ],
     },
     {
       id: 'Copy URL',

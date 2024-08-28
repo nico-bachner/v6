@@ -46,9 +46,34 @@ const Template: React.FC<{ children: React.ReactNode }> = ({ children }) => {
             <h1 className="font-serif text-4xl font-extrabold tracking-tight text-gray-900 dark:text-gray-100 sm:text-5xl lg:text-6xl">
               {title}
             </h1>
-            <p className="text-lg font-light text-gray-500 sm:text-xl lg:text-2xl">
+            <p className="text-lg font-light sm:text-xl lg:text-2xl">
               {description}
             </p>
+          </div>
+
+          <div className="flex items-center justify-between">
+            {previous ? (
+              <Link href={previous.slug} className="flex items-center gap-2">
+                <ChevronLeftIcon className="h-6 w-6" />
+                <div className="flex flex-1 flex-col">
+                  <span className="text-sm text-gray-500">Previous</span>
+                  <span>{previous.title}</span>
+                </div>
+              </Link>
+            ) : (
+              <div></div>
+            )}
+            {next ? (
+              <Link href={next.slug} className="flex items-center gap-2">
+                <div className="flex flex-1 flex-col">
+                  <span className="text-sm text-gray-500">Next</span>
+                  <span>{next.title}</span>
+                </div>
+                <ChevronRightIcon className="h-6 w-6" />
+              </Link>
+            ) : (
+              <div></div>
+            )}
           </div>
 
           <div className="flex justify-between text-sm font-light text-gray-500 sm:text-base lg:text-lg">
@@ -69,7 +94,7 @@ const Template: React.FC<{ children: React.ReactNode }> = ({ children }) => {
 
         <hr />
 
-        <article className="prose dark:prose-invert sm:prose-lg lg:prose-xl">
+        <article className="prose dark:prose-invert sm:prose-lg lg:prose-xl prose-a:text-blue-500">
           {children}
         </article>
 
