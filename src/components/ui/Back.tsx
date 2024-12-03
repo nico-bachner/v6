@@ -6,8 +6,8 @@ export const Back: React.FC<{ href: string }> = ({ href }) => (
   <Link
     href={href}
     className={cn(
-      'bg-white/5 shadow backdrop-blur',
-      'hover:bg-white/10 hover:shadow-lg hover:backdrop-blur-lg',
+      'shadow dark:bg-gray-900',
+      'hover:shadow-lg dark:hover:bg-gray-800',
       'fixed flex w-fit items-center rounded px-4 py-2',
     )}
   >

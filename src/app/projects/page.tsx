@@ -43,8 +43,8 @@ const Page = async () => {
             key={slug}
             href={`/${slug}`}
             className={cn(
-              'bg-white/5 shadow backdrop-blur',
-              'transition hover:bg-white/10 hover:shadow-lg hover:backdrop-blur-lg',
+              'shadow dark:bg-gray-900',
+              'transition hover:shadow-lg dark:hover:bg-gray-800',
               'relative flex flex-col gap-2 rounded-lg p-8 sm:gap-3 sm:p-10 lg:gap-4 lg:p-12',
               'md:col-span-2 md:odd:col-start-1 md:even:col-start-2',
             )}
@@ -58,7 +58,7 @@ const Page = async () => {
 
             <div
               className={cn(
-                'bg-white/5 shadow backdrop-blur',
+                'shadow dark:bg-gray-800',
                 'absolute -right-3 -top-3 rounded px-4 py-2',
               )}
             >

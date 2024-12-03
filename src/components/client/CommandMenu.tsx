@@ -325,7 +325,7 @@ export const CommandMenu = () => {
 
           <hr className="border-gray-500/20" />
 
-          <Command.List className="my-3 max-h-80 overflow-y-scroll px-3">
+          <Command.List className="max-h-80 overflow-y-scroll p-3">
             <Command.Empty className="p-6 text-center">
               No results found.
             </Command.Empty>
