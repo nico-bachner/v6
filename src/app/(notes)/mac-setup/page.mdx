@@ -22,7 +22,17 @@ Now move on to the Dock settings (`View > Desktop & Dock`):
 
 1. Automatically hide & show the Dock
 2. Do not show recent applications in Dock
-3. In _Hot Corners_, deactivate all shortcuts.
+3. In _Hot Corners_, deactivate all shortcuts
+
+Next up, the _Keyboard_ settings (`View > Keyboard`):
+
+1. Set _Key repeat rate_ to the fastest setting
+2. Set _Delay until repeat_ to the shortest setting
+3. Turn on _Keyboard navigation_
+
+Then, the _Date & Time_ settings (`View > Date & Time`):
+
+1. Enable 24-hour time
 
 ### Finder Settings
 
@@ -97,7 +107,7 @@ defaults write -g NSAutomaticSpellingCorrectionEnabled -bool false
 4. When opening a new terminal window, fish shows a welcome message. To disable this, run the following:
 
    ```bash
-   set -g fish_greeting ""
+   set -U fish_greeting ""
    ```
 
 5. To make the terminal more interactive, install [Starship](https://starship.rs):
@@ -136,6 +146,12 @@ Go to _Terminal > Settings_ and change the font to **Fira Code**.
    git config --global --edit
    ```
 
+2. Make git track the current branch automatically when pushing
+
+   ```bash
+   git config --global push.default current
+   ```
+
 ### GitHub CLI
 
 1. [Log in to GitHub](https://github.com/login).
@@ -157,28 +173,22 @@ Go to _Terminal > Settings_ and change the font to **Fira Code**.
 1. Install [Node.js](https://nodejs.org):
 
    ```bash
-   brew install node@18
+   brew install node@22
    ```
 
-2. Configure Node for Fish
-
-   ```
-   fish_add_path /opt/homebrew/opt/node@18/bin
-   ```
-
-3. Install [pnpm](https://pnpm.io):
+2. Install [pnpm](https://pnpm.io):
 
    ```bash
    brew install pnpm
    ```
 
-4. Run the automatic setup script:
+3. Run the automatic setup script:
 
    ```bash
    pnpm setup
    ```
 
-5. Install [ni](https://github.com/antfu/ni):
+4. Install [ni](https://github.com/antfu/ni):
 
    ```bash
    pnpm add -g @antfu/ni
@@ -207,23 +217,20 @@ Go to _Terminal > Settings_ and change the font to **Fira Code**.
    pnpm add -g vercel
    ```
 
-3. Link current project
+## Desktop Setup
+
+1. Clone the Desktop repository
 
    ```bash
-   vercel link
+   cd ~/
+   gh repo clone nico-bachner/Desktop
    ```
 
-4. Fetch environmental variables
+2. Transfer remaining files from USB
 
-   ```bash
-   vercel env pull
-   ```
+3. On the desktop, right click, then _Sort By > Kind_
 
 ## Applications Setup
-
-```bash
-brew tap homebrew/cask
-```
 
 ### Raycast
 
@@ -241,10 +248,11 @@ brew tap homebrew/cask
 
 5. In Raycast, go to **Store** and install the following extensions:
 
+   - Speedtest
+   - Lorem Ipsum
+   - Color Picker
    - Brew
    - Kill Process
-   - Lorem Ipsum
-   - Speedtest
 
 ### Visual Studio Code
 
@@ -263,3 +271,22 @@ brew tap homebrew/cask
    - [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
    - [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
    - [MDX](https://marketplace.visualstudio.com/items?itemName=unifiedjs.vscode-mdx)
+
+### NordVPN
+
+1. Install [NordVPN](https://nordvpn.com)
+
+   ```bash
+   brew install --cask nordvpn
+   ```
+
+2. Show only in menu bar
+3. Open on login
+
+### Other Applications
+
+```bash
+brew install --cask slack
+brew install --cask notion
+brew install --cask discord
+```
