@@ -267,6 +267,9 @@ export default MDXPage
 ```
 
 [^1]: I highly recommend pnpm — it's faster than yarn, and way faster than npm. Also, your `node_modules/` will be much more organised with pnpm, since only the packages defined in your `package.json` will be included in the root of the directory.
+
 [^2]: [Anthony Fu](https://antfu.me) has created a tool called [ni](https://github.com/antfu/ni) that makes choosing the correct node.js package manager much easier. If you are inside an existing project that contains a lockfile, it will automatically use the corresponding package manager ([npm](https://www.npmjs.com), [yarn](https://yarnpkg.com), or [pnpm](https://pnpm.io)). If no lockfile is found, you will have the option to choose which package manager you'd like to use. If you don't have _ni_ installed, you can use npm, yarn, or pnpm directly, or you can install it via one of them.
+
 [^3]: A common approach is storing your content in a folder in the root directory of your project. Often this folder is called something along the lines of `content/` or `data/`.
+
 [^4]: Usually the markdown files are committed to the external repository—an approach often favoured by documentation sites. However, you might want to also look into using GitHub issues as a CMS, which [swyx](https://swyx.io) does for [his site](https://github.com/sw-yx/swyxdotio).
