@@ -1,5 +1,6 @@
 import Link from 'next/link'
 
+import { Text } from '@/components/ui/Text'
 import { fetchProjects } from '@/lib/fetchProjects'
 import { cn } from '@/utils/cn'
 
@@ -28,6 +29,8 @@ const Page = async () => {
         <h1 className="font-serif text-4xl font-extrabold tracking-tight text-primary-3 sm:text-5xl lg:text-6xl">
           Projects
         </h1>
+
+        <Text as="h1">Projects</Text>
 
         <p className="sm:text-lg lg:text-xl">
           A comprehensive list of all the projects I have worked on, past &

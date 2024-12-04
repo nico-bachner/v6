@@ -2,26 +2,22 @@ import { cn } from '@/utils/cn'
 
 type TextProps = Omit<React.ComponentProps<'p'>, 'color'> & {
   as?: 'h1' | 'h2' | 'h3' | 'p'
-  size?: 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl' | '4xl'
+  size?: 'sm' | 'md' | 'lg' | 'xl' | '2xl'
   color?: 1 | 2 | 3
 }
 
 const getTextSize = (size: TextProps['size']) => {
   switch (size) {
     case 'sm':
-      return 'text-sm sm:text-base md:text-lg'
+      return 'text-sm sm:text-base md:text-lg font-light tracking-wide'
     case 'md':
-      return 'text-base sm:text-lg md:text-xl'
+      return 'text-base sm:text-lg md:text-xl font-normal tracking-normal'
     case 'lg':
-      return 'text-lg sm:text-xl md:text-2xl'
+      return 'text-lg sm:text-xl md:text-2xl font-medium tracking-tight font-serif'
     case 'xl':
-      return 'text-xl sm:text-2xl md:text-3xl'
+      return 'text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight font-serif'
     case '2xl':
-      return 'text-2xl sm:text-3xl md:text-4xl'
-    case '3xl':
-      return 'text-3xl sm:text-4xl md:text-5xl'
-    case '4xl':
-      return 'text-4xl sm:text-5xl md:text-6xl'
+      return 'text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight font-serif'
   }
 }
 
@@ -58,7 +54,7 @@ export const Text: React.FC<TextProps> = ({
       return (
         <h1
           className={cn(
-            getTextSize(size) ?? getTextSize('4xl'),
+            getTextSize(size) ?? getTextSize('2xl'),
             getTextColor(color) ?? getTextColor(3),
             className,
           )}
@@ -69,7 +65,7 @@ export const Text: React.FC<TextProps> = ({
       return (
         <h2
           className={cn(
-            getTextSize(size) ?? getTextSize('2xl'),
+            getTextSize(size) ?? getTextSize('xl'),
             getTextColor(color) ?? getTextColor(3),
             className,
           )}
