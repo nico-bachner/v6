@@ -9,15 +9,15 @@ type TextProps = Omit<React.ComponentProps<'p'>, 'color'> & {
 const getTextSize = (size: TextProps['size']) => {
   switch (size) {
     case 'sm':
-      return 'text-sm sm:text-base md:text-lg font-light tracking-wide'
+      return 'text-sm sm:text-md lg:text-lg font-light tracking-wide leading-relaxed'
     case 'md':
-      return 'text-base sm:text-lg md:text-xl font-normal tracking-normal'
+      return 'text-md sm:text-lg lg:text-xl font-normal tracking-normal leading-relaxed'
     case 'lg':
-      return 'text-lg sm:text-xl md:text-2xl font-medium tracking-tight font-serif'
+      return 'text-lg sm:text-xl lg:text-2xl font-medium tracking-tight leading-normal font-serif'
     case 'xl':
-      return 'text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight font-serif'
+      return 'text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight font-serif leading-snug'
     case '2xl':
-      return 'text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight font-serif'
+      return 'text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight font-serif leading-tight'
   }
 }
 

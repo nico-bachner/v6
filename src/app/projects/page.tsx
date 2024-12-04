@@ -25,19 +25,15 @@ const Page = async () => {
 
   return (
     <main className="lg:pt-28 flex flex-col gap-12 px-6 pb-32 pt-12 md:pt-20">
-      <div className="mx-auto flex max-w-2xl flex-col gap-8">
-        <h1 className="font-serif text-4xl font-extrabold tracking-tight text-primary-3 sm:text-5xl lg:text-6xl">
-          Projects
-        </h1>
-
+      <div className="mx-auto flex max-w-screen-sm flex-col gap-8">
         <Text as="h1">Projects</Text>
 
-        <p className="sm:text-lg lg:text-xl">
+        <Text as="p">
           A comprehensive list of all the projects I have worked on, past &
           present, sorted in reverse chronological order by their respective
           dates of completion. Click on a card to reveal more information about
           the project.
-        </p>
+        </Text>
       </div>
 
       <div className="mx-auto grid max-w-5xl grid-cols-1 gap-y-8 md:grid-cols-3 lg:gap-x-40">
@@ -63,7 +59,7 @@ const Page = async () => {
                 'absolute -right-3 -top-3 rounded px-4 py-2',
               )}
             >
-              <p className="text-sm font-light text-primary-1 sm:text-base lg:text-lg">
+              <p className="sm:text-md text-sm font-light text-primary-1 lg:text-lg">
                 {getPeriod(from, to)}
               </p>
             </div>

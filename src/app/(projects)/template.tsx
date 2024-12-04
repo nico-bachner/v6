@@ -37,10 +37,10 @@ const Template: React.FC<TemplateProps> = ({ children }) => {
   const next = projects[index + 1]
 
   return (
-    <main className="mx-auto flex max-w-2xl flex-col gap-8">
+    <main className="mx-auto flex max-w-screen-sm flex-col gap-8">
       <div className="mt-8 flex flex-col gap-12 sm:mt-12 lg:mt-20">
-        <div className="mx-auto flex max-w-2xl flex-col gap-4 text-center">
-          <h1 className="font-serif text-4xl font-extrabold tracking-tight text-gray-900 dark:text-gray-100 sm:text-5xl lg:text-6xl">
+        <div className="mx-auto flex max-w-screen-sm flex-col gap-4 text-center">
+          <h1 className="text-gray-900 dark:text-gray-100 font-serif text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl">
             {title}
           </h1>
           <p className="text-lg font-light sm:text-xl lg:text-2xl">
@@ -53,7 +53,7 @@ const Template: React.FC<TemplateProps> = ({ children }) => {
             <Link href={previous.slug} className="flex items-center gap-2">
               <ChevronLeftIcon className="h-6 w-6" />
               <div className="flex flex-1 flex-col">
-                <span className="text-sm text-gray-500">Previous</span>
+                <span className="text-gray-500 text-sm">Previous</span>
                 <span>{previous.title}</span>
               </div>
             </Link>
@@ -63,7 +63,7 @@ const Template: React.FC<TemplateProps> = ({ children }) => {
           {next ? (
             <Link href={next.slug} className="flex items-center gap-2">
               <div className="flex flex-1 flex-col">
-                <span className="text-sm text-gray-500">Next</span>
+                <span className="text-gray-500 text-sm">Next</span>
                 <span>{next.title}</span>
               </div>
               <ChevronRightIcon className="h-6 w-6" />
@@ -73,7 +73,7 @@ const Template: React.FC<TemplateProps> = ({ children }) => {
           )}
         </div>
 
-        <div className="flex justify-between text-sm font-light text-gray-500 sm:text-base lg:text-lg">
+        <div className="text-gray-500 sm:text-md flex justify-between text-sm font-light lg:text-lg">
           <p>
             Last Updated:{' '}
             {commits && commits[0]
@@ -91,7 +91,7 @@ const Template: React.FC<TemplateProps> = ({ children }) => {
 
       <hr />
 
-      <article className="prose dark:prose-invert sm:prose-lg lg:prose-xl prose-a:text-blue-500">
+      <article className="prose-a:text-blue-500 prose sm:prose-lg lg:prose-xl dark:prose-invert">
         {children}
       </article>
 
@@ -103,7 +103,7 @@ const Template: React.FC<TemplateProps> = ({ children }) => {
             <Link href={previous.slug} className="flex items-center gap-2">
               <ChevronLeftIcon className="h-6 w-6" />
               <div className="flex flex-1 flex-col">
-                <span className="text-sm text-gray-500">Previous</span>
+                <span className="text-gray-500 text-sm">Previous</span>
                 <span>{previous.title}</span>
               </div>
             </Link>
@@ -113,7 +113,7 @@ const Template: React.FC<TemplateProps> = ({ children }) => {
           {next ? (
             <Link href={next.slug} className="flex items-center gap-2">
               <div className="flex flex-1 flex-col">
-                <span className="text-sm text-gray-500">Next</span>
+                <span className="text-gray-500 text-sm">Next</span>
                 <span>{next.title}</span>
               </div>
               <ChevronRightIcon className="h-6 w-6" />

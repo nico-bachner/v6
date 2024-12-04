@@ -292,7 +292,7 @@ export const CommandMenu = () => {
             <div className="flex items-center gap-4 px-3">
               <MagnifyingGlassIcon className="h-6 w-6" />
               <Command.Input
-                className="w-full bg-transparent text-base outline-none placeholder:text-primary-1"
+                className="text-md w-full bg-transparent outline-none placeholder:text-primary-1"
                 placeholder="Type a command or search..."
                 value={value}
                 onValueChange={(value) => setValue(value)}
