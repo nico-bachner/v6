@@ -1,17 +1,43 @@
 import type { Config } from 'tailwindcss'
+import defaultColors from 'tailwindcss/colors'
 
 const config: Config = {
-  darkMode: 'class',
   content: ['./src/**/*.{tsx,mdx}'],
   theme: {
+    colors: {
+      // theme colors
+      theme: 'var(--color-theme)',
+      highlight: {
+        1: 'var(--color-highlight-1)',
+        2: 'var(--color-highlight-2)',
+        3: 'var(--color-highlight-3)',
+      },
+      primary: {
+        1: 'var(--color-primary-1)',
+        2: 'var(--color-primary-2)',
+        3: 'var(--color-primary-3)',
+      },
+      neutral: {
+        1: 'var(--color-neutral-1)',
+        2: 'var(--color-neutral-2)',
+        3: 'var(--color-neutral-3)',
+      },
+
+      // utility colors
+      current: defaultColors.current,
+      transparent: defaultColors.transparent,
+    },
     blur: {
       DEFAULT: '8px',
       lg: '16px',
     },
     borderRadius: {
-      DEFAULT: '0.375rem',
-      lg: '0.75rem',
+      DEFAULT: '0.5rem',
+      lg: '1rem',
       full: '9999px',
+    },
+    borderColor: {
+      DEFAULT: 'var(--color-neutral-1)',
     },
     boxShadow: {
       DEFAULT: '0 3px 12px var(--tw-shadow-color, hsla(0deg, 0%, 0%, 0.1))',

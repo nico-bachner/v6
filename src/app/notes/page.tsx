@@ -9,11 +9,11 @@ const Page = async () => {
   return (
     <main className="lg:pt-28 flex flex-col gap-20 px-6 pb-32 pt-12 md:pt-20">
       <div className="mx-auto flex max-w-2xl flex-col gap-4">
-        <h1 className="font-serif text-4xl font-extrabold tracking-tight text-gray-900 dark:text-gray-100 sm:text-5xl lg:text-6xl">
+        <h1 className="font-serif text-4xl font-extrabold tracking-tight text-primary-3 sm:text-5xl lg:text-6xl">
           Notes
         </h1>
 
-        <p className="prose dark:prose-invert sm:prose-lg lg:prose-xl">
+        <p className="sm:text-lg lg:text-xl">
           My public notes, sorted in reverse chronological order by the date
           they were originally published. Click through to read them.
         </p>
@@ -21,11 +21,11 @@ const Page = async () => {
 
       <div className="flex flex-col gap-12">
         <div className="mx-auto flex max-w-2xl flex-col gap-2">
-          <h2 className="font-serif text-2xl font-bold tracking-tight text-gray-900 dark:text-gray-100 sm:text-3xl lg:text-4xl">
+          <h2 className="font-serif text-2xl font-bold tracking-tight text-primary-3 sm:text-3xl lg:text-4xl">
             Timeless
           </h2>
 
-          <p className="prose dark:prose-invert sm:prose-lg lg:prose-xl">
+          <p className="sm:text-lg lg:text-xl">
             These notes need not be dated, whether it be due to their abstract
             nature or because they are continuously updated.
           </p>
@@ -39,16 +39,15 @@ const Page = async () => {
                 key={slug}
                 href={`/${slug}`}
                 className={cn(
-                  'shadow backdrop-blur dark:bg-gray-900',
-                  'transition hover:shadow-lg dark:hover:bg-gray-800',
+                  'border bg-highlight-1',
                   'relative flex flex-col gap-2 rounded-lg p-8 sm:gap-3 sm:p-10 lg:gap-4 lg:p-12',
                 )}
               >
-                <p className="text-xl tracking-tight sm:text-2xl lg:text-3xl">
-                  <strong className="font-extrabold">{title}</strong>
-                </p>
+                <h3 className="text-xl font-extrabold tracking-tight text-primary-3 sm:text-2xl lg:text-3xl">
+                  {title}
+                </h3>
 
-                <p className="prose line-clamp-2 dark:prose-invert sm:prose-lg lg:prose-xl">
+                <p className="line-clamp-2 sm:text-lg lg:text-xl">
                   {description}
                 </p>
               </Link>
@@ -58,11 +57,11 @@ const Page = async () => {
 
       <div className="flex flex-col gap-12">
         <div className="mx-auto flex max-w-2xl flex-col gap-2">
-          <h2 className="font-serif text-2xl font-bold tracking-tight text-gray-900 dark:text-gray-100 sm:text-3xl lg:text-4xl">
+          <h2 className="font-serif text-2xl font-bold tracking-tight text-primary-3 sm:text-3xl lg:text-4xl">
             Timestamped
           </h2>
 
-          <p className="prose dark:prose-invert sm:prose-lg lg:prose-xl">
+          <p className="sm:text-lg lg:text-xl">
             These notes were relevant at the time of writing, but will due to
             their nature become less relevant over time as best practices and
             available technologies change.
@@ -78,26 +77,25 @@ const Page = async () => {
                 key={slug}
                 href={`/${slug}`}
                 className={cn(
-                  'shadow dark:dark:bg-gray-900',
-                  'transition hover:shadow-lg dark:hover:bg-gray-800',
+                  'border bg-highlight-1',
                   'relative flex flex-col justify-center gap-2 rounded-lg p-8 sm:gap-3 sm:p-10 lg:gap-4 lg:p-12',
                 )}
               >
-                <p className="text-xl tracking-tight sm:text-2xl lg:text-3xl">
-                  <strong className="font-extrabold">{title}</strong>
-                </p>
+                <h3 className="text-xl font-extrabold tracking-tight text-primary-3 sm:text-2xl lg:text-3xl">
+                  {title}
+                </h3>
 
-                <p className="prose line-clamp-2 dark:prose-invert sm:prose-lg lg:prose-xl">
+                <p className="line-clamp-2 sm:text-lg lg:text-xl">
                   {description}
                 </p>
 
                 <div
                   className={cn(
-                    'shadow backdrop-blur dark:bg-gray-800',
+                    'border bg-highlight-1',
                     'absolute -right-3 -top-3 rounded px-4 py-2',
                   )}
                 >
-                  <p className="text-sm font-light text-gray-500 sm:text-base lg:text-lg">
+                  <p className="text-sm font-light text-primary-1 sm:text-base lg:text-lg">
                     {published!.toLocaleDateString('en-AU')}
                   </p>
                 </div>

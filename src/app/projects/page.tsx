@@ -25,11 +25,11 @@ const Page = async () => {
   return (
     <main className="lg:pt-28 flex flex-col gap-12 px-6 pb-32 pt-12 md:pt-20">
       <div className="mx-auto flex max-w-2xl flex-col gap-8">
-        <h1 className="font-serif text-4xl font-extrabold tracking-tight text-gray-900 dark:text-gray-100 sm:text-5xl lg:text-6xl">
+        <h1 className="font-serif text-4xl font-extrabold tracking-tight text-primary-3 sm:text-5xl lg:text-6xl">
           Projects
         </h1>
 
-        <p className="prose dark:prose-invert sm:prose-lg lg:prose-xl">
+        <p className="sm:text-lg lg:text-xl">
           A comprehensive list of all the projects I have worked on, past &
           present, sorted in reverse chronological order by their respective
           dates of completion. Click on a card to reveal more information about
@@ -43,26 +43,24 @@ const Page = async () => {
             key={slug}
             href={`/${slug}`}
             className={cn(
-              'shadow dark:bg-gray-900',
-              'transition hover:shadow-lg dark:hover:bg-gray-800',
+              'border bg-highlight-1',
               'relative flex flex-col gap-2 rounded-lg p-8 sm:gap-3 sm:p-10 lg:gap-4 lg:p-12',
               'md:col-span-2 md:odd:col-start-1 md:even:col-start-2',
             )}
           >
-            <p className="text-xl tracking-tight sm:text-2xl lg:text-3xl">
-              <strong className="font-extrabold">{title}</strong>
-            </p>
-            <p className="prose line-clamp-2 dark:prose-invert sm:prose-lg lg:prose-xl">
-              {description}
-            </p>
+            <h3 className="text-xl font-extrabold tracking-tight text-primary-3 sm:text-2xl lg:text-3xl">
+              {title}
+            </h3>
+
+            <p className="line-clamp-2 sm:text-lg lg:text-xl">{description}</p>
 
             <div
               className={cn(
-                'shadow dark:bg-gray-800',
+                'border bg-highlight-1',
                 'absolute -right-3 -top-3 rounded px-4 py-2',
               )}
             >
-              <p className="text-sm font-light text-gray-500 sm:text-base lg:text-lg">
+              <p className="text-sm font-light text-primary-1 sm:text-base lg:text-lg">
                 {getPeriod(from, to)}
               </p>
             </div>

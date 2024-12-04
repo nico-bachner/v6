@@ -27,7 +27,6 @@ import { CommandIcon } from '@/icons/Command'
 import { GitHubIcon } from '@/icons/GitHub'
 import { LinkedInIcon } from '@/icons/LinkedIn'
 import { NBIcon } from '@/icons/NB'
-import { cn } from '@/utils/cn'
 
 import { KeyboardShortcut } from '../ui/KeyboardShortcut'
 
@@ -274,12 +273,9 @@ export const CommandMenu = () => {
           onClick={() => {
             setOpen(!open)
           }}
-          className={cn(
-            'bg-white/10 shadow-lg backdrop-blur-lg transition',
-            'cursor-pointer rounded-full p-4 hover:scale-110',
-          )}
+          className="cursor-pointer rounded-full bg-highlight-2 p-4 backdrop-blur-lg transition hover:scale-110 hover:bg-highlight-3"
         >
-          <CommandIcon className="h-8 w-8 stroke-gray-700 dark:stroke-gray-300" />
+          <CommandIcon className="h-8 w-8" />
         </button>
       </nav>
 
@@ -296,7 +292,7 @@ export const CommandMenu = () => {
             <div className="flex items-center gap-4 px-3">
               <MagnifyingGlassIcon className="h-6 w-6" />
               <Command.Input
-                className="w-full bg-transparent text-base outline-none placeholder:text-gray-500"
+                className="w-full bg-transparent text-base outline-none placeholder:text-primary-1"
                 placeholder="Type a command or search..."
                 value={value}
                 onValueChange={(value) => setValue(value)}
@@ -310,10 +306,7 @@ export const CommandMenu = () => {
                     onClick={() => {
                       setTabs(tabs.slice(0, i + 1))
                     }}
-                    className={cn(
-                      'bg-white/5 shadow backdrop-blur',
-                      'py-0.5 rounded px-2 text-sm text-gray-700 dark:text-gray-300',
-                    )}
+                    className="py-0.5 rounded bg-highlight-2 px-2 text-sm transition hover:bg-highlight-3 focus:scale-110 focus:bg-highlight-3 focus:outline-none"
                   >
                     {tab}
                   </button>
@@ -323,7 +316,7 @@ export const CommandMenu = () => {
             </div>
           </div>
 
-          <hr className="border-gray-500/20" />
+          <hr className="border-neutral-1" />
 
           <Command.List className="max-h-80 overflow-y-scroll p-3">
             <Command.Empty className="p-6 text-center">
@@ -363,10 +356,7 @@ export const CommandMenu = () => {
                               }
                             }
                           }}
-                          className={cn(
-                            'data-[selected=true]:backdrop-blur-sm data-[selected=true]:bg-white/5 data-[selected=true]:shadow',
-                            'flex cursor-pointer items-center gap-4 rounded p-3',
-                          )}
+                          className="flex cursor-pointer items-center gap-4 rounded p-3 data-[selected=true]:bg-highlight-2"
                         >
                           <Icon className="box-content h-6 w-6" />
                           <span className="flex-1">{title}</span>

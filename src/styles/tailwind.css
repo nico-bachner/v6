@@ -2,14 +2,48 @@
 @tailwind components;
 @tailwind utilities;
 
+[data-theme='light'] {
+  --color-theme: #fed7aa;
+
+  --color-primary-1: oklch(from var(--color-theme) calc(l - 0.3) c h);
+  --color-primary-2: oklch(from var(--color-theme) calc(l - 0.4) c h);
+  --color-primary-3: oklch(from var(--color-theme) calc(l - 0.5) c h);
+
+  --color-neutral-1: oklch(from var(--color-theme) 0.8 calc(c / 2) h);
+  --color-neutral-2: oklch(from var(--color-theme) 0.6 calc(c / 2) h);
+  --color-neutral-3: oklch(from var(--color-theme) 0.4 calc(c / 2) h);
+}
+[data-theme='dark'] {
+  --color-theme: #431407;
+
+  --color-primary-1: oklch(from var(--color-theme) calc(l + 0.3) c h);
+  --color-primary-2: oklch(from var(--color-theme) calc(l + 0.4) c h);
+  --color-primary-3: oklch(from var(--color-theme) calc(l + 0.5) c h);
+
+  --color-neutral-1: oklch(from var(--color-theme) 0.2 calc(c / 2) h);
+  --color-neutral-2: oklch(from var(--color-theme) 0.4 calc(c / 2) h);
+  --color-neutral-3: oklch(from var(--color-theme) 0.6 calc(c / 2) h);
+}
+
+:root {
+  --color-highlight-1: oklch(from var(--color-theme) calc(l + 0.05) c h);
+  --color-highlight-2: oklch(from var(--color-theme) calc(l + 0.1) c h);
+  --color-highlight-3: oklch(from var(--color-theme) calc(l + 0.15) c h);
+}
+
+::selection {
+  color: var(--color-primary-3);
+  background-color: var(--color-highlight-3);
+}
+
 * {
   overflow-wrap: break-word;
 }
 
 [cmdk-group-heading] {
-  @apply p-3 text-sm capitalize;
+  @apply px-3 pb-2 pt-4 text-sm capitalize text-primary-1;
 }
 
 .hljs-comment {
-  @apply text-gray-500;
+  @apply text-neutral-3;
 }
