@@ -1,2 +1,4 @@
-export const cn = (...args: any[]) =>
-  args.filter((arg) => typeof arg == 'string').join(' ')
+import { type ClassValue, clsx } from 'clsx'
+import { twMerge } from 'tailwind-merge'
+
+export const cn = (...args: ClassValue[]) => twMerge(clsx(args))

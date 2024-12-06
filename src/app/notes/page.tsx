@@ -45,10 +45,7 @@ const Page = async () => {
                   'relative flex flex-col gap-2 rounded-lg p-8 sm:gap-3 sm:p-10 lg:gap-4 lg:p-12',
                 )}
               >
-                <h3 className="text-xl font-extrabold tracking-tight text-primary-3 sm:text-2xl lg:text-3xl">
-                  {title}
-                </h3>
-                <Text as="h3" className="font-sans font-extrabold">
+                <Text as="h3" className="font-bold">
                   {title}
                 </Text>
 
@@ -64,11 +61,11 @@ const Page = async () => {
         <div className={cn('mx-auto max-w-screen-sm', 'flex flex-col gap-2')}>
           <Text as="h2">Timestamped</Text>
 
-          <p className="sm:text-lg lg:text-xl">
+          <Text as="p">
             These notes were relevant at the time of writing, but will due to
             their nature become less relevant over time as best practices and
             available technologies change.
-          </p>
+          </Text>
         </div>
 
         <div
@@ -89,13 +86,13 @@ const Page = async () => {
                   'relative flex flex-col justify-center gap-2 rounded-lg p-8 sm:gap-3 sm:p-10 lg:gap-4 lg:p-12',
                 )}
               >
-                <h3 className="text-xl font-extrabold tracking-tight text-primary-3 sm:text-2xl lg:text-3xl">
+                <Text as="h3" className="font-bold">
                   {title}
-                </h3>
+                </Text>
 
-                <p className="line-clamp-2 sm:text-lg lg:text-xl">
+                <Text as="p" className="line-clamp-2">
                   {description}
-                </p>
+                </Text>
 
                 <div
                   className={cn(
@@ -103,7 +100,7 @@ const Page = async () => {
                     'absolute -right-3 -top-3 rounded px-4 py-2',
                   )}
                 >
-                  <p className="sm:text-md text-sm font-light text-primary-1 lg:text-lg">
+                  <p className="text-sm font-light text-primary-1 sm:text-md lg:text-lg">
                     {published!.toLocaleDateString('en-AU')}
                   </p>
                 </div>

@@ -47,11 +47,13 @@ const Page = async () => {
               'md:col-span-2 md:odd:col-start-1 md:even:col-start-2',
             )}
           >
-            <h3 className="text-xl font-extrabold tracking-tight text-primary-3 sm:text-2xl lg:text-3xl">
+            <Text as="h3" className="font-bold">
               {title}
-            </h3>
+            </Text>
 
-            <p className="line-clamp-2 sm:text-lg lg:text-xl">{description}</p>
+            <Text as="p" className="line-clamp-2">
+              {description}
+            </Text>
 
             <div
               className={cn(
@@ -59,7 +61,7 @@ const Page = async () => {
                 'absolute -right-3 -top-3 rounded px-4 py-2',
               )}
             >
-              <p className="sm:text-md text-sm font-light text-primary-1 lg:text-lg">
+              <p className="text-sm font-light text-primary-1 sm:text-md lg:text-lg">
                 {getPeriod(from, to)}
               </p>
             </div>
