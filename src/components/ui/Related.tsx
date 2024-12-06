@@ -1,14 +1,10 @@
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline'
 import Link from 'next/link'
 
+import { Sibling } from '@/types/content'
 import { cn } from '@/utils/cn'
 
 import { Text } from './Text'
-
-type Sibling = {
-  slug: string
-  title: string
-}
 
 type RelatedProps = {
   previous?: Sibling
