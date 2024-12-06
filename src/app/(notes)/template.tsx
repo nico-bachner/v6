@@ -1,9 +1,9 @@
 'use client'
 
-import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline'
-import Link from 'next/link'
-import { useSelectedLayoutSegment } from 'next/navigation'
+import { notFound, useSelectedLayoutSegment } from 'next/navigation'
 
+import { Related } from '@/components/ui/Related'
+import { Text } from '@/components/ui/Text'
 import { useCommits } from '@/hooks/useCommits'
 import { useNotes } from '@/hooks/useNotes'
 import { GitHubIcon } from '@/icons/GitHub'
@@ -18,13 +18,13 @@ const Template: React.FC<TemplateProps> = ({ children }) => {
     return <></>
   }
 
-  const note = notes.find(({ slug }) => slug == selectedLayoutSegment)
+  const project = notes.find(({ slug }) => slug == selectedLayoutSegment)
 
-  if (!note) {
-    throw new Error(`Note ${note} does not exist in notes`)
+  if (!project) {
+    notFound()
   }
 
-  const { slug, title, description, content } = note
+  const { slug, title, description, content } = project
 
   const readingTime = [
     Math.ceil(content.split(' ').length / 230),
@@ -38,54 +38,31 @@ const Template: React.FC<TemplateProps> = ({ children }) => {
 
   return (
     <main className="mx-auto flex max-w-screen-sm flex-col gap-8">
-      <div className="mt-8 flex flex-col gap-12 sm:mt-12 lg:mt-20">
-        <div className="mx-auto flex max-w-screen-sm flex-col gap-4 text-center">
-          <h1 className="text-gray-900 dark:text-gray-100 font-serif text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl">
+      <div className="flex flex-col gap-12">
+        <div className="mx-auto flex w-full max-w-screen-sm flex-col gap-4">
+          <Text as="h1" className="text-center">
             {title}
-          </h1>
-          <p className="text-lg font-light sm:text-xl lg:text-2xl">
+          </Text>
+          <Text as="p" size="lg" className="text-center font-sans font-light">
             {description}
-          </p>
+          </Text>
         </div>
 
-        <div className="flex items-center justify-between">
-          {previous ? (
-            <Link href={previous.slug} className="flex items-center gap-2">
-              <ChevronLeftIcon className="h-6 w-6" />
-              <div className="flex flex-1 flex-col">
-                <span className="text-gray-500 text-sm">Previous</span>
-                <span>{previous.title}</span>
-              </div>
-            </Link>
-          ) : (
-            <div></div>
-          )}
-          {next ? (
-            <Link href={next.slug} className="flex items-center gap-2">
-              <div className="flex flex-1 flex-col">
-                <span className="text-gray-500 text-sm">Next</span>
-                <span>{next.title}</span>
-              </div>
-              <ChevronRightIcon className="h-6 w-6" />
-            </Link>
-          ) : (
-            <div></div>
-          )}
-        </div>
+        <Related previous={previous} next={next} />
 
-        <div className="text-gray-500 flex justify-between text-sm font-light sm:text-md lg:text-lg">
-          <p>
+        <div className="flex justify-between">
+          <Text>
             Last Updated:{' '}
             {commits && commits[0]
               ? new Date(commits[0].commit.author.date).toLocaleDateString()
               : 'Never'}
-          </p>
-          <p>
+          </Text>
+          <Text>
             {readingTime[0] == readingTime[1]
               ? readingTime[0]
               : readingTime.join('-')}{' '}
             minute read
-          </p>
+          </Text>
         </div>
       </div>
 
@@ -97,43 +74,18 @@ const Template: React.FC<TemplateProps> = ({ children }) => {
 
       <hr />
 
-      <div className="mb-32 flex flex-col gap-8">
-        <div className="flex items-center justify-between">
-          {previous ? (
-            <Link href={previous.slug} className="flex items-center gap-2">
-              <ChevronLeftIcon className="h-6 w-6" />
-              <div className="flex flex-1 flex-col">
-                <span className="text-gray-500 text-sm">Previous</span>
-                <span>{previous.title}</span>
-              </div>
-            </Link>
-          ) : (
-            <div></div>
-          )}
-          {next ? (
-            <Link href={next.slug} className="flex items-center gap-2">
-              <div className="flex flex-1 flex-col">
-                <span className="text-gray-500 text-sm">Next</span>
-                <span>{next.title}</span>
-              </div>
-              <ChevronRightIcon className="h-6 w-6" />
-            </Link>
-          ) : (
-            <div></div>
-          )}
-        </div>
+      <div className="mb-32 flex flex-col items-center gap-8">
+        <Related previous={previous} next={next} className="w-full" />
 
-        <div className="flex justify-center">
-          <a
-            href={`https://github.com/nico-bachner/v6/edit/main/src/app/(notes)/${slug}/page.mdx`}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-2 rounded border px-4 py-2"
-          >
-            <GitHubIcon className="h-5 w-5" />
-            <span>Edit on GitHub</span>
-          </a>
-        </div>
+        <a
+          href={`https://github.com/nico-bachner/v6/edit/main/src/app/(notes)/${slug}/page.mdx`}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex flex-row items-center gap-4 rounded border px-4 py-2"
+        >
+          <GitHubIcon className="size-4 stroke-primary-1 sm:size-5 lg:size-6" />
+          <Text>Edit on GitHub</Text>
+        </a>
       </div>
     </main>
   )

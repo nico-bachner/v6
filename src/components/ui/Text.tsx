@@ -1,13 +1,15 @@
 import { cn } from '@/utils/cn'
 
 type TextProps = Omit<React.ComponentProps<'p'>, 'color'> & {
-  as?: 'h1' | 'h2' | 'h3' | 'p'
-  size?: 'sm' | 'md' | 'lg' | 'xl' | '2xl'
+  as?: 'h1' | 'h2' | 'h3' | 'p' | 'span'
+  size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl'
   color?: 1 | 2 | 3
 }
 
 const getTextSize = (size: TextProps['size']) => {
   switch (size) {
+    case 'xs':
+      return 'text-xs sm:text-sm lg:text-md font-light tracking-wide leading-relaxed'
     case 'sm':
       return 'text-sm sm:text-md lg:text-lg font-light tracking-wide leading-relaxed'
     case 'md':
@@ -43,7 +45,7 @@ const getTextColor = (color: TextProps['color']) => {
  * 3 - Subdued text (e.g. metadata)
  */
 export const Text: React.FC<TextProps> = ({
-  as = 'p',
+  as = 'span',
   size,
   color,
   className,
@@ -89,6 +91,17 @@ export const Text: React.FC<TextProps> = ({
           className={cn(
             getTextSize(size) ?? getTextSize('md'),
             getTextColor(color) ?? getTextColor(2),
+            className,
+          )}
+          {...props}
+        />
+      )
+    case 'span':
+      return (
+        <span
+          className={cn(
+            getTextSize(size) ?? getTextSize('sm'),
+            getTextColor(color) ?? getTextColor(1),
             className,
           )}
           {...props}
