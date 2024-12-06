@@ -275,7 +275,7 @@ export const CommandMenu = () => {
           }}
           className="cursor-pointer rounded-full bg-highlight-2 p-4 backdrop-blur-lg transition hover:scale-110 hover:bg-highlight-3"
         >
-          <CommandIcon className="h-8 w-8" />
+          <CommandIcon className="h-8 w-8 stroke-primary-3" />
         </button>
       </nav>
 
@@ -292,7 +292,7 @@ export const CommandMenu = () => {
             <div className="flex items-center gap-4 px-3">
               <MagnifyingGlassIcon className="h-6 w-6" />
               <Command.Input
-                className="text-md w-full bg-transparent outline-none placeholder:text-primary-1"
+                className="w-full bg-transparent text-md outline-none placeholder:text-primary-1"
                 placeholder="Type a command or search..."
                 value={value}
                 onValueChange={(value) => setValue(value)}
