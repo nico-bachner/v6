@@ -73,7 +73,7 @@ const Template: React.FC<TemplateProps> = ({ children }) => {
           )}
         </div>
 
-        <div className="text-gray-500 sm:text-md flex justify-between text-sm font-light lg:text-lg">
+        <div className="text-gray-500 flex justify-between text-sm font-light sm:text-md lg:text-lg">
           <p>
             Last Updated:{' '}
             {commits && commits[0]

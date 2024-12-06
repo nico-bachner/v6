@@ -1,16 +1,22 @@
+import { ChevronLeftIcon } from '@heroicons/react/24/outline'
 import Link from 'next/link'
 
 import { cn } from '@/utils/cn'
+
+import { Text } from './Text'
 
 export const Back: React.FC<{ href: string }> = ({ href }) => (
   <Link
     href={href}
     className={cn(
-      'shadow dark:bg-gray-900',
-      'hover:shadow-lg dark:hover:bg-gray-800',
-      'fixed flex w-fit items-center rounded px-4 py-2',
+      'bg-highlight-1 transition-colors hover:bg-highlight-2',
+      'fixed flex items-center rounded px-2',
     )}
   >
-    {'<-'} Back
+    <ChevronLeftIcon className="size-4 sm:size-5 lg:size-6" />
+
+    <Text size="sm" className="p-2">
+      Back
+    </Text>
   </Link>
 )

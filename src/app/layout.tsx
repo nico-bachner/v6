@@ -29,7 +29,7 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => (
   <html lang="en">
     <body
       className={cn(
-        'bg-theme text-primary-2 font-sans',
+        'bg-theme font-sans text-primary-2',
         sans.variable,
         serif.variable,
       )}

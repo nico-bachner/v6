@@ -273,7 +273,7 @@ export const CommandMenu = () => {
           onClick={() => {
             setOpen(!open)
           }}
-          className="cursor-pointer rounded-full bg-highlight-2 p-4 backdrop-blur-lg transition hover:scale-110 hover:bg-highlight-3"
+          className="cursor-pointer rounded-full bg-highlight-2 p-4 transition hover:scale-110 hover:bg-highlight-3"
         >
           <CommandIcon className="h-8 w-8 stroke-primary-3" />
         </button>
