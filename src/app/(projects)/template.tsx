@@ -37,7 +37,7 @@ const Template: React.FC<TemplateProps> = ({ children }) => {
   const next = projects[index + 1]
 
   return (
-    <main className="mx-auto flex max-w-screen-sm flex-col gap-8">
+    <main className="mx-auto flex w-full max-w-screen-sm flex-col gap-8">
       <div className="flex flex-col gap-12">
         <div className="mx-auto flex w-full max-w-screen-sm flex-col gap-4">
           <Text as="h1" className="text-center">
@@ -68,13 +68,11 @@ const Template: React.FC<TemplateProps> = ({ children }) => {
 
       <hr />
 
-      <article className="prose-a:text-blue-500 prose sm:prose-lg lg:prose-xl dark:prose-invert">
-        {children}
-      </article>
+      <article className="prose w-full">{children}</article>
 
       <hr />
 
-      <div className="mb-32 flex flex-col items-center gap-8">
+      <div className="flex flex-col items-center gap-8">
         <Related previous={previous} next={next} className="w-full" />
 
         <a

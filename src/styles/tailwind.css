@@ -29,6 +29,9 @@
   --color-highlight-1: oklch(from var(--color-theme) calc(l + 0.05) c h);
   --color-highlight-2: oklch(from var(--color-theme) calc(l + 0.1) c h);
   --color-highlight-3: oklch(from var(--color-theme) calc(l + 0.15) c h);
+
+  --tw-prose-body: var(--color-primary-2);
+  --tw-prose-headings: var(--color-primary-3);
 }
 
 ::selection {

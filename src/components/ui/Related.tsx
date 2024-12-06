@@ -23,8 +23,11 @@ export const Related: React.FC<RelatedProps> = ({
 }) => (
   <div className={cn('flex items-center justify-between', className)}>
     {previous ? (
-      <Link href={previous.slug} className="flex items-center gap-2">
-        <ChevronLeftIcon className="h-6 w-6 stroke-primary-1" />
+      <Link
+        href={previous.slug}
+        className="flex items-center gap-2 rounded p-1 pr-3 transition-colors hover:bg-highlight-1"
+      >
+        <ChevronLeftIcon className="size-6 stroke-primary-1 sm:size-7 lg:size-8" />
 
         <div className="flex flex-1 flex-col">
           <Text size="xs" className="text-primary-1">
@@ -37,7 +40,10 @@ export const Related: React.FC<RelatedProps> = ({
       <div />
     )}
     {next ? (
-      <Link href={next.slug} className="flex items-center gap-2">
+      <Link
+        href={next.slug}
+        className="flex items-center gap-2 rounded p-1 pl-3 transition-colors hover:bg-highlight-1"
+      >
         <div className="flex flex-1 flex-col">
           <Text size="xs" className="text-primary-1">
             Next
@@ -45,7 +51,7 @@ export const Related: React.FC<RelatedProps> = ({
           <Text className="leading-tight text-primary-2">{next.title}</Text>
         </div>
 
-        <ChevronRightIcon className="h-6 w-6 stroke-primary-1" />
+        <ChevronRightIcon className="size-6 stroke-primary-1 sm:size-7 lg:size-8" />
       </Link>
     ) : (
       <div />
