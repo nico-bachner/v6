@@ -96,7 +96,7 @@ export const CommandMenu = () => {
       icon: NBIcon,
       title: 'Go to Front Page',
       group: 'Navigation',
-      shortcut: 'ctrl+1',
+      shortcut: '2',
       action: () => {
         router.push('/')
       },
@@ -112,7 +112,7 @@ export const CommandMenu = () => {
           icon: Square2StackIcon,
           title: 'Browse Projects',
           group: 'Navigation',
-          shortcut: 'ctrl+2',
+          shortcut: '1',
           action: () => {
             router.push('/projects')
           },
@@ -145,7 +145,7 @@ export const CommandMenu = () => {
           icon: DocumentDuplicateIcon,
           title: 'Browse Notes',
           group: 'Navigation',
-          shortcut: 'ctrl+3',
+          shortcut: '3',
           action: () => {
             router.push('/notes')
           },
