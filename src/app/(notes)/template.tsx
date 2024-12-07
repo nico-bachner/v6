@@ -1,6 +1,7 @@
 'use client'
 
-import { notFound, useSelectedLayoutSegment } from 'next/navigation'
+import { useHotkeys } from '@mantine/hooks'
+import { notFound, useRouter, useSelectedLayoutSegment } from 'next/navigation'
 
 import { ContentTemplate } from '@/components/ui/ContentTemplate'
 import { useCommits } from '@/hooks/useCommits'
@@ -11,6 +12,16 @@ const Template: React.FC<TemplateProps> = ({ children }) => {
   const selectedLayoutSegment = useSelectedLayoutSegment()
   const notes = useNotes()
   const commits = useCommits('src/app/(notes)/')
+  const router = useRouter()
+
+  useHotkeys([
+    [
+      'Escape',
+      () => {
+        router.push('/projects')
+      },
+    ],
+  ])
 
   if (!notes) {
     return <></>
