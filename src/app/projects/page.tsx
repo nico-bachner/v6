@@ -1,5 +1,6 @@
 import Link from 'next/link'
 
+import { Card } from '@/components/client/Card'
 import { Text } from '@/components/ui/Text'
 import { fetchProjects } from '@/lib/fetchProjects'
 import { cn } from '@/utils/cn'
@@ -37,35 +38,15 @@ const Page = async () => {
       </div>
 
       <div className="mx-auto grid max-w-5xl grid-cols-1 gap-y-8 md:grid-cols-3 lg:gap-x-40">
-        {projects.map(({ title, description, slug, from, to }) => (
-          <Link
+        {projects.map(({ slug, title, description, from, to }) => (
+          <Card
             key={slug}
             href={`/${slug}`}
-            className={cn(
-              'border bg-highlight-1',
-              'relative flex flex-col gap-2 rounded-lg p-8 sm:gap-3 sm:p-10 lg:gap-4 lg:p-12',
-              'md:col-span-2 md:odd:col-start-1 md:even:col-start-2',
-            )}
-          >
-            <Text as="h3" className="font-bold">
-              {title}
-            </Text>
-
-            <Text as="p" className="line-clamp-2">
-              {description}
-            </Text>
-
-            <div
-              className={cn(
-                'border bg-highlight-1',
-                'absolute -right-3 -top-3 rounded px-4 py-2',
-              )}
-            >
-              <p className="text-sm font-light text-primary-1 sm:text-md lg:text-lg">
-                {getPeriod(from, to)}
-              </p>
-            </div>
-          </Link>
+            title={title}
+            description={description}
+            additionalInfo={getPeriod(from, to)}
+            className="md:col-span-2 md:odd:col-start-1 md:even:col-start-2"
+          />
         ))}
       </div>
     </main>
