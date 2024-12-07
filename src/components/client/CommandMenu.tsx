@@ -272,9 +272,9 @@ export const CommandMenu = () => {
             setOpen(!open)
           }}
           tabIndex={open ? -1 : 1}
-          className="cursor-pointer rounded-full bg-highlight-2 p-4 transition hover:scale-110 hover:bg-highlight-3 focus:scale-110 focus:bg-highlight-3 focus:outline-none"
+          className="cursor-pointer rounded-full bg-highlight-2 p-2 transition hover:scale-110 hover:bg-highlight-3 focus:scale-110 focus:bg-highlight-3 focus:outline-none sm:p-3 lg:p-4"
         >
-          <CommandIcon className="h-8 w-8 stroke-primary-3" />
+          <CommandIcon className="size-6 stroke-primary-3 sm:size-8 lg:size-10" />
         </button>
       </nav>
 
