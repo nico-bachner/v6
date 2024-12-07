@@ -30,6 +30,28 @@ import { NBIcon } from '@/icons/NB'
 
 import { KeyboardShortcut } from '../ui/KeyboardShortcut'
 
+type Item = {
+  id: string
+  icon: React.FC<Omit<React.SVGProps<SVGSVGElement>, 'ref'>>
+  title: string
+  group: string
+  shortcut?: string
+  action?: () => void
+  children?: Item[]
+}
+
+const getAllItems = (items: Item[], allItems: Item[] = []) => {
+  items.forEach((item) => {
+    allItems.push(item)
+
+    if (item.children) {
+      getAllItems(item.children, allItems)
+    }
+  })
+
+  return allItems
+}
+
 export const CommandMenu = () => {
   const [open, setOpen] = useState(false)
   const [value, setValue] = useState<string>()
@@ -38,16 +60,6 @@ export const CommandMenu = () => {
   const router = useRouter()
   const projects = useProjects()
   const notes = useNotes()
-
-  type Item = {
-    id: string
-    icon: React.FC<Omit<React.SVGProps<SVGSVGElement>, 'ref'>>
-    title: string
-    group: string
-    shortcut?: string
-    action?: () => void
-    children?: Item[]
-  }
 
   const items: Item[] = [
     {
@@ -247,21 +259,7 @@ export const CommandMenu = () => {
 
   useHotkeys([['mod+k', () => setOpen(!open)], ...getAllShortcuts(items)])
 
-  const allItems: Item[] = []
-
-  const getAllItems = (items: Item[]) => {
-    items.forEach((item) => {
-      allItems.push(item)
-
-      if (item.children) {
-        getAllItems(item.children)
-      }
-    })
-
-    return items
-  }
-
-  getAllItems(items)
+  const allItems = getAllItems(items)
 
   const currentTabItems =
     allItems.find(({ id }) => tabs[tabs.length - 1] == id)?.children ?? items
