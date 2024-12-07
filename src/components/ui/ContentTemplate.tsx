@@ -1,4 +1,4 @@
-import { Related } from '@/components/ui/Related'
+import { Related } from '@/components/client/Related'
 import { Text } from '@/components/ui/Text'
 import { GitHubIcon } from '@/icons/GitHub'
 import { ReadingTime, Sibling } from '@/types/content'

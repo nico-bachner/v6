@@ -2,7 +2,7 @@
 
 import { notFound, useSelectedLayoutSegment } from 'next/navigation'
 
-import { ContentTemplate } from '@/components/client/ContentTemplate'
+import { ContentTemplate } from '@/components/ui/ContentTemplate'
 import { useCommits } from '@/hooks/useCommits'
 import { useNotes } from '@/hooks/useNotes'
 import { TemplateProps } from '@/types/next'
