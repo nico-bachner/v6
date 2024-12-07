@@ -316,7 +316,7 @@ export const CommandMenu = () => {
             </div>
           </div>
 
-          <hr className="border-neutral-1" />
+          <hr />
 
           <Command.List className="max-h-80 overflow-y-scroll p-3">
             <Command.Empty className="p-6 text-center">

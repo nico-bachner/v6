@@ -8,10 +8,6 @@
   --color-primary-1: oklch(from var(--color-theme) calc(l - 0.3) c h);
   --color-primary-2: oklch(from var(--color-theme) calc(l - 0.4) c h);
   --color-primary-3: oklch(from var(--color-theme) calc(l - 0.5) c h);
-
-  --color-neutral-1: oklch(from var(--color-theme) 0.8 calc(c / 2) h);
-  --color-neutral-2: oklch(from var(--color-theme) 0.6 calc(c / 2) h);
-  --color-neutral-3: oklch(from var(--color-theme) 0.4 calc(c / 2) h);
 }
 [data-theme='dark'] {
   --color-theme: #431407;
@@ -19,10 +15,6 @@
   --color-primary-1: oklch(from var(--color-theme) calc(l + 0.3) c h);
   --color-primary-2: oklch(from var(--color-theme) calc(l + 0.4) c h);
   --color-primary-3: oklch(from var(--color-theme) calc(l + 0.5) c h);
-
-  --color-neutral-1: oklch(from var(--color-theme) 0.2 calc(c / 2) h);
-  --color-neutral-2: oklch(from var(--color-theme) 0.4 calc(c / 2) h);
-  --color-neutral-3: oklch(from var(--color-theme) 0.6 calc(c / 2) h);
 }
 
 :root {
@@ -30,8 +22,7 @@
   --color-highlight-2: oklch(from var(--color-theme) calc(l + 0.1) c h);
   --color-highlight-3: oklch(from var(--color-theme) calc(l + 0.15) c h);
 
-  --tw-prose-body: var(--color-primary-2);
-  --tw-prose-headings: var(--color-primary-3);
+  scrollbar-color: var(--color-primary-1) transparent;
 }
 
 ::selection {
@@ -43,10 +34,17 @@
   overflow-wrap: break-word;
 }
 
+/* cmdk */
 [cmdk-group-heading] {
   @apply px-3 pb-2 pt-4 text-sm capitalize text-primary-1;
 }
 
+/* @tailwindcss/typography */
+.prose > blockquote {
+  border-color: var(--color-primary-1);
+}
+
+/* rehype-highlight */
 .hljs-comment {
-  @apply text-neutral-3;
+  @apply text-primary-1;
 }

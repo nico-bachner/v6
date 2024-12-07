@@ -7,20 +7,15 @@ const config: Config = {
     colors: {
       // theme colors
       theme: 'var(--color-theme)',
-      highlight: {
-        1: 'var(--color-highlight-1)',
-        2: 'var(--color-highlight-2)',
-        3: 'var(--color-highlight-3)',
-      },
       primary: {
         1: 'var(--color-primary-1)',
         2: 'var(--color-primary-2)',
         3: 'var(--color-primary-3)',
       },
-      neutral: {
-        1: 'var(--color-neutral-1)',
-        2: 'var(--color-neutral-2)',
-        3: 'var(--color-neutral-3)',
+      highlight: {
+        1: 'var(--color-highlight-1)',
+        2: 'var(--color-highlight-2)',
+        3: 'var(--color-highlight-3)',
       },
 
       // utility colors
@@ -37,7 +32,7 @@ const config: Config = {
       full: '9999px',
     },
     borderColor: {
-      DEFAULT: 'var(--color-neutral-1)',
+      DEFAULT: 'var(--color-primary-1)',
     },
     boxShadow: {
       DEFAULT: '0 3px 12px var(--tw-shadow-color, hsla(0deg, 0%, 0%, 0.1))',

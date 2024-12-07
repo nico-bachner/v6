@@ -3,6 +3,7 @@ import { Text } from '@/components/ui/Text'
 import { GitHubIcon } from '@/icons/GitHub'
 import { ReadingTime, Sibling } from '@/types/content'
 import { TemplateProps } from '@/types/next'
+import { cn } from '@/utils/cn'
 
 type ContentTemplateProps = TemplateProps & {
   slug: string
@@ -27,10 +28,8 @@ export const ContentTemplate: React.FC<ContentTemplateProps> = ({
   <main className="flex flex-col gap-8">
     <div className="mx-auto flex w-full max-w-screen-sm flex-col gap-12">
       <div className="flex flex-col gap-4">
-        <Text as="h1" className="text-center">
-          {title}
-        </Text>
-        <Text as="p" size="lg" className="text-center font-sans font-light">
+        <Text as="h1">{title}</Text>
+        <Text as="p" size="lg" className="font-sans font-light">
           {description}
         </Text>
       </div>
@@ -52,9 +51,29 @@ export const ContentTemplate: React.FC<ContentTemplateProps> = ({
       </div>
     </div>
 
-    <hr className="mx-auto w-full max-w-screen-sm" />
+    <hr className="border-neutral mx-auto w-full max-w-screen-sm" />
 
-    <article className="prose mx-auto max-w-screen-lg sm:prose-lg lg:prose-xl">
+    <article
+      className={cn(
+        'prose mx-auto w-full max-w-screen-lg sm:prose-lg lg:prose-xl',
+
+        'prose-headings:mx-auto prose-headings:w-full prose-headings:max-w-screen-sm prose-headings:text-primary-3',
+        'prose-p:mx-auto prose-p:w-full prose-p:max-w-screen-sm prose-p:text-primary-2',
+        'prose-a:text-primary-3',
+        'prose-blockquote:mx-auto prose-blockquote:w-full prose-blockquote:max-w-screen-sm',
+        'prose-strong:text-primary-3',
+        'prose-code:text-primary-3',
+        'prose-pre:mx-auto prose-pre:w-full prose-pre:max-w-screen-md prose-pre:bg-highlight-1',
+        'prose-ol:mx-auto prose-ol:w-full prose-ol:max-w-screen-sm',
+        'prose-ul:mx-auto prose-ul:w-full prose-ul:max-w-screen-sm',
+        'prose-li:text-primary-2',
+        'prose-table:mx-auto prose-table:w-full prose-table:max-w-screen-sm',
+        'prose-tr:flex prose-tr:flex-row',
+        'prose-th:flex-1',
+        'prose-td:flex-1',
+        'prose-hr:mx-auto prose-hr:w-full prose-hr:max-w-screen-sm',
+      )}
+    >
       {children}
     </article>
 
