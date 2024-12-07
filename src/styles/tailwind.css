@@ -49,6 +49,10 @@
 }
 
 /* rehype-highlight */
+.hljs-keyword,
+.hljs-name {
+  @apply font-bold text-primary-3;
+}
 .hljs-comment {
-  @apply text-primary-1;
+  @apply font-light text-primary-1;
 }
