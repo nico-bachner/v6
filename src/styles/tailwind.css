@@ -43,6 +43,10 @@
 .prose > blockquote {
   border-color: var(--color-primary-1);
 }
+.prose > table tr,
+.prose > table > thead {
+  border-bottom-color: var(--color-primary-1);
+}
 
 /* rehype-highlight */
 .hljs-comment {

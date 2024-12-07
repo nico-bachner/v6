@@ -70,7 +70,7 @@ export const ContentTemplate: React.FC<ContentTemplateProps> = ({
         'prose-table:mx-auto prose-table:w-full prose-table:max-w-screen-sm',
         'prose-tr:flex prose-tr:flex-row',
         'prose-th:flex-1',
-        'prose-td:flex-1',
+        'text-primary-2 prose-td:flex-1',
         'prose-hr:mx-auto prose-hr:w-full prose-hr:max-w-screen-sm',
       )}
     >
