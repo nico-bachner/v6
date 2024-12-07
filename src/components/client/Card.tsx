@@ -45,16 +45,18 @@ export const Card: React.FC<CardProps> = ({
         {description}
       </Text>
 
-      <div
-        className={cn(
-          'absolute -right-3 -top-3 rounded border px-4 py-2',
-          active ? 'bg-highlight-2' : 'bg-highlight-1',
-        )}
-      >
-        <p className="text-sm font-light text-primary-1 sm:text-md lg:text-lg">
-          {additionalInfo}
-        </p>
-      </div>
+      {additionalInfo && (
+        <div
+          className={cn(
+            'absolute -right-3 -top-3 rounded border px-4 py-2',
+            active ? 'bg-highlight-2' : 'bg-highlight-1',
+          )}
+        >
+          <p className="text-sm font-light text-primary-1 sm:text-md lg:text-lg">
+            {additionalInfo}
+          </p>
+        </div>
+      )}
     </Link>
   )
 }

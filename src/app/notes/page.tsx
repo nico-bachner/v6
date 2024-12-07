@@ -1,5 +1,6 @@
 import Link from 'next/link'
 
+import { Card } from '@/components/client/Card'
 import { Text } from '@/components/ui/Text'
 import { fetchNotes } from '@/lib/fetchNotes'
 import { cn } from '@/utils/cn'
@@ -37,22 +38,12 @@ const Page = async () => {
           {notes
             .filter(({ published }) => !published)
             .map(({ title, description, slug }) => (
-              <Link
+              <Card
                 key={slug}
                 href={`/${slug}`}
-                className={cn(
-                  'border bg-highlight-1',
-                  'relative flex flex-col gap-2 rounded-lg p-8 sm:gap-3 sm:p-10 lg:gap-4 lg:p-12',
-                )}
-              >
-                <Text as="h3" className="font-bold">
-                  {title}
-                </Text>
-
-                <Text as="p" className="line-clamp-2">
-                  {description}
-                </Text>
-              </Link>
+                title={title}
+                description={description}
+              />
             ))}
         </div>
       </div>
@@ -77,35 +68,18 @@ const Page = async () => {
           {notes
             .filter(({ published }) => published)
             .sort((a, b) => b.published!.getTime() - a.published!.getTime())
-            .map(({ title, description, slug, published }) => (
-              <Link
-                key={slug}
-                href={`/${slug}`}
-                className={cn(
-                  'border bg-highlight-1',
-                  'relative flex flex-col justify-center gap-2 rounded-lg p-8 sm:gap-3 sm:p-10 lg:gap-4 lg:p-12',
-                )}
-              >
-                <Text as="h3" className="font-bold">
-                  {title}
-                </Text>
-
-                <Text as="p" className="line-clamp-2">
-                  {description}
-                </Text>
-
-                <div
-                  className={cn(
-                    'border bg-highlight-1',
-                    'absolute -right-3 -top-3 rounded px-4 py-2',
-                  )}
-                >
-                  <p className="text-sm font-light text-primary-1 sm:text-md lg:text-lg">
-                    {published!.toLocaleDateString('en-AU')}
-                  </p>
-                </div>
-              </Link>
-            ))}
+            .map(({ title, description, slug, published }) => {
+              if (published)
+                return (
+                  <Card
+                    key={slug}
+                    href={`/${slug}`}
+                    title={title}
+                    description={description}
+                    additionalInfo={published.toLocaleDateString('en-AU')}
+                  />
+                )
+            })}
         </div>
       </div>
     </main>
