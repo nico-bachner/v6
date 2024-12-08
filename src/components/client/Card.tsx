@@ -32,7 +32,7 @@ export const Card: React.FC<CardProps> = ({
       onFocus={() => setActive(true)}
       onBlur={() => setActive(false)}
       className={cn(
-        'relative flex flex-col gap-2 rounded-lg border p-8 focus:outline-none sm:gap-3 sm:p-10 lg:gap-4 lg:p-12',
+        'relative flex flex-col gap-2 rounded-lg border p-8 transition-colors focus:outline-none sm:gap-3 sm:p-10 lg:gap-4 lg:p-12',
         active ? 'bg-highlight-2' : 'bg-highlight-1',
         className,
       )}
@@ -48,7 +48,7 @@ export const Card: React.FC<CardProps> = ({
       {additionalInfo && (
         <div
           className={cn(
-            'absolute -right-3 -top-3 rounded border px-4 py-2',
+            'absolute -right-3 -top-3 rounded border px-4 py-2 transition-colors',
             active ? 'bg-highlight-2' : 'bg-highlight-1',
           )}
         >
