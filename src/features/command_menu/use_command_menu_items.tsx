@@ -15,11 +15,7 @@ import {
   UserIcon,
 } from '@heroicons/react/24/outline'
 import { useTheme } from 'next-themes'
-import {
-  usePathname,
-  useRouter,
-  useSelectedLayoutSegment,
-} from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 
 import { useNotes } from '@/hooks/useNotes'
 import { useProjects } from '@/hooks/useProjects'
