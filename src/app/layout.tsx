@@ -2,7 +2,7 @@ import { Analytics } from '@vercel/analytics/react'
 import type { Metadata } from 'next'
 import { Fraunces, Inter } from 'next/font/google'
 
-import { CommandMenu } from '@/components/client/CommandMenu'
+import { CommandMenu } from '@/features/command_menu'
 import { Theme } from '@/providers/Theme'
 import '@/styles/tailwind.css'
 import { cn } from '@/utils/cn'
