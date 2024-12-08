@@ -11,10 +11,11 @@ export const Dialog: React.FC<React.ComponentProps<typeof Root>> = ({
   <Root {...props}>
     <Portal>
       <Overlay className={cn('backdrop-blur', 'fixed inset-0')} />
+
       <Content
         className={cn(
           'rounded-lg border bg-highlight-1 shadow-lg',
-          'fixed left-[50%] top-[50%] z-50 w-full max-w-xl translate-x-[-50%] translate-y-[-50%]',
+          'fixed left-[50dvw] top-[50dvh] z-50 w-full max-w-xl translate-x-[-50%] translate-y-[-50%]',
         )}
       >
         {children}
