@@ -16,10 +16,12 @@ export const Dialog: React.FC<React.ComponentProps<typeof Root>> = ({
 
   useLayoutEffect(() => {
     const updateViewportDimensions = () => {
-      setViewportDimensions({
-        width: window.innerWidth,
-        height: window.innerHeight,
-      })
+      if (window.visualViewport) {
+        setViewportDimensions({
+          width: window.visualViewport.width,
+          height: window.visualViewport.height,
+        })
+      }
     }
 
     updateViewportDimensions()
