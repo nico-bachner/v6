@@ -1,5 +1,3 @@
-import Link from 'next/link'
-
 import { Card } from '@/components/client/Card'
 import { Text } from '@/components/ui/Text'
 import { fetchNotes } from '@/lib/fetchNotes'

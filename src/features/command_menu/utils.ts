@@ -1,6 +1,6 @@
 import { CommandMenuItem } from './types'
 
-export const getFlattenedItems = (
+export const getFlattenedCommandMenuItems = (
   items: CommandMenuItem[],
   allItems: CommandMenuItem[] = [],
 ) => {
@@ -8,7 +8,7 @@ export const getFlattenedItems = (
     allItems.push(item)
 
     if (item.children) {
-      getFlattenedItems(item.children, allItems)
+      getFlattenedCommandMenuItems(item.children, allItems)
     }
   })
 

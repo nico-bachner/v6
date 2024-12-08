@@ -1,9 +1,6 @@
-import Link from 'next/link'
-
 import { Card } from '@/components/client/Card'
 import { Text } from '@/components/ui/Text'
 import { fetchProjects } from '@/lib/fetchProjects'
-import { cn } from '@/utils/cn'
 
 const Page = async () => {
   const projects = await fetchProjects()
@@ -37,7 +34,7 @@ const Page = async () => {
         </Text>
       </div>
 
-      <div className="mx-auto grid max-w-5xl grid-cols-1 gap-y-8 md:grid-cols-3 lg:gap-x-40">
+      <div className="mx-auto grid max-w-screen-lg grid-cols-1 gap-y-8 md:grid-cols-3 lg:gap-x-40">
         {projects.map(({ slug, title, description, from, to }) => (
           <Card
             key={slug}

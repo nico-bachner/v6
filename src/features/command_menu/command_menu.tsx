@@ -11,7 +11,7 @@ import { pruneArray } from '@/utils/prune_array'
 
 import { KeyboardShortcut } from '../../components/ui/KeyboardShortcut'
 import { useCommandMenuItems } from './use_command_menu_items'
-import { getFlattenedItems } from './utils'
+import { getFlattenedCommandMenuItems } from './utils'
 
 export const CommandMenu: React.FC = () => {
   const [isCommandMenuOpen, setIsCommandMenuOpen] = useState(false)
@@ -20,7 +20,7 @@ export const CommandMenu: React.FC = () => {
 
   const items = useCommandMenuItems()
 
-  const flattenedItems = getFlattenedItems(items)
+  const flattenedItems = getFlattenedCommandMenuItems(items)
   const shortcuts = pruneArray(
     flattenedItems.map(({ shortcut, action }) => {
       if (shortcut && action) {
