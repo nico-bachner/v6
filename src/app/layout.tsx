@@ -35,9 +35,9 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => (
       )}
     >
       <Theme>
-        {children}
-
         <CommandMenu />
+
+        {children}
       </Theme>
 
       <Analytics />
