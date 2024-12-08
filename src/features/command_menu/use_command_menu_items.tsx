@@ -15,31 +15,107 @@ import {
   UserIcon,
 } from '@heroicons/react/24/outline'
 import { useTheme } from 'next-themes'
-import { useRouter } from 'next/navigation'
+import {
+  usePathname,
+  useRouter,
+  useSelectedLayoutSegment,
+} from 'next/navigation'
 
 import { useNotes } from '@/hooks/useNotes'
 import { useProjects } from '@/hooks/useProjects'
 import { GitHubIcon } from '@/icons/GitHub'
 import { LinkedInIcon } from '@/icons/LinkedIn'
 import { NBIcon } from '@/icons/NB'
+import { pruneArray } from '@/utils/prune_array'
 
 import { CommandMenuItem } from './types'
+
+const getThemeIcon = (theme: string | undefined) => {
+  switch (theme) {
+    case 'light':
+      return SunIcon
+    case 'dark':
+      return MoonIcon
+    default:
+      return ComputerDesktopIcon
+  }
+}
 
 export const useCommandMenuItems = (): CommandMenuItem[] => {
   const { theme, setTheme } = useTheme()
   const router = useRouter()
   const projects = useProjects()
   const notes = useNotes()
+  const pathname = usePathname()
 
-  return [
+  return pruneArray([
+    pathname == '/projects'
+      ? {
+          id: 'Search Projects',
+          icon: MagnifyingGlassIcon,
+          title: 'Search Projects',
+          group: 'Navigation',
+          children: projects?.map(({ title, slug }) => ({
+            id: title,
+            icon: StopIcon,
+            title: title,
+            group: 'Projects',
+            action: () => {
+              router.push(`/${slug}`)
+            },
+          })),
+        }
+      : undefined,
+    pathname == '/notes'
+      ? {
+          id: 'Search Notes',
+          icon: DocumentIcon,
+          title: 'Search Notes',
+          group: 'Navigation',
+          children: notes?.map(({ title, slug }) => ({
+            id: title,
+            icon: DocumentIcon,
+            title: title,
+            group: 'Notes',
+            action: () => {
+              router.push(`/${slug}`)
+            },
+          })),
+        }
+      : undefined,
+    {
+      id: 'Front Page',
+      icon: NBIcon,
+      title: 'Go to Front Page',
+      group: 'Navigation',
+      shortcut: '2',
+      action: () => {
+        router.push('/')
+      },
+    },
+    {
+      id: 'Projects',
+      icon: Square2StackIcon,
+      title: 'Browse Projects',
+      group: 'Navigation',
+      shortcut: '1',
+      action: () => {
+        router.push('/projects')
+      },
+    },
+    {
+      id: 'Notes',
+      icon: DocumentDuplicateIcon,
+      title: 'Browse Notes',
+      group: 'Navigation',
+      shortcut: '3',
+      action: () => {
+        router.push('/notes')
+      },
+    },
     {
       id: 'Theme',
-      icon:
-        theme == 'light'
-          ? SunIcon
-          : theme == 'dark'
-            ? MoonIcon
-            : ComputerDesktopIcon,
+      icon: getThemeIcon(theme),
       title: 'Change Theme',
       group: 'Settings',
       shortcut: 'ctrl+t',
@@ -70,82 +146,6 @@ export const useCommandMenuItems = (): CommandMenuItem[] => {
           action: () => {
             setTheme('system')
           },
-        },
-      ],
-    },
-    {
-      id: 'Front Page',
-      icon: NBIcon,
-      title: 'Go to Front Page',
-      group: 'Navigation',
-      shortcut: '2',
-      action: () => {
-        router.push('/')
-      },
-    },
-    {
-      id: 'Projects',
-      icon: Square2StackIcon,
-      title: 'Projects',
-      group: 'Navigation',
-      children: [
-        {
-          id: 'Browse Projects',
-          icon: Square2StackIcon,
-          title: 'Browse Projects',
-          group: 'Navigation',
-          shortcut: '1',
-          action: () => {
-            router.push('/projects')
-          },
-        },
-        {
-          id: 'Search Projects',
-          icon: MagnifyingGlassIcon,
-          title: 'Search Projects',
-          group: 'Navigation',
-          children: projects?.map(({ title, slug }) => ({
-            id: title,
-            icon: StopIcon,
-            title: title,
-            group: 'Projects',
-            action: () => {
-              router.push(`/${slug}`)
-            },
-          })),
-        },
-      ],
-    },
-    {
-      id: 'Notes',
-      icon: DocumentDuplicateIcon,
-      title: 'Browse Notes',
-      group: 'Navigation',
-      children: [
-        {
-          id: 'Browse Notes',
-          icon: DocumentDuplicateIcon,
-          title: 'Browse Notes',
-          group: 'Navigation',
-          shortcut: '3',
-          action: () => {
-            router.push('/notes')
-          },
-        },
-        {
-          id: 'Search Notes',
-          icon: DocumentIcon,
-          title: 'Search Notes',
-          group: 'Navigation',
-          children: notes?.map(({ title, slug }) => ({
-            id: title,
-            icon: DocumentIcon,
-            title: title,
-            group: 'Notes',
-            action: () => {
-              router.push(`/${slug}`)
-            },
-          })),
         },
       ],
     },
@@ -205,5 +205,5 @@ export const useCommandMenuItems = (): CommandMenuItem[] => {
         window.open('https://github.com/nico-bachner/v6')
       },
     },
-  ]
+  ])
 }

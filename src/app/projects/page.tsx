@@ -2,24 +2,24 @@ import { Card } from '@/components/client/Card'
 import { Text } from '@/components/ui/Text'
 import { fetchProjects } from '@/lib/fetchProjects'
 
-const Page = async () => {
-  const projects = await fetchProjects()
+const getPeriod = (from: Date, to: Date | undefined) => {
+  const from_year = from.getFullYear()
 
-  const getPeriod = (from: Date, to: Date | undefined) => {
-    const from_year = from.getFullYear()
+  if (to) {
+    const to_year = to.getFullYear()
 
-    if (to) {
-      const to_year = to.getFullYear()
-
-      if (to_year == from_year) {
-        return to_year.toString()
-      }
-
-      return [from_year, to_year].join(' – ')
+    if (to_year == from_year) {
+      return to_year.toString()
     }
 
-    return `${from_year} – Now`
+    return [from_year, to_year].join(' – ')
   }
+
+  return `${from_year} – Now`
+}
+
+const Page = async () => {
+  const projects = await fetchProjects()
 
   return (
     <main className="lg:pt-28 flex flex-col gap-12 px-6 pb-32 pt-12 md:pt-20">
