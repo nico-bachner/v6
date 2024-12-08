@@ -54,8 +54,8 @@ const config: Config = {
       '5xl': '3rem',
       '6xl': '3.75rem',
       '7xl': '4.5rem',
-      '8xl': '6rem',
-      '9xl': '8rem',
+      '8xl': '5.5rem',
+      '9xl': '6.5rem',
     },
     height: ({ theme }) => ({
       ...theme('spacing'),
