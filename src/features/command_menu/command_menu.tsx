@@ -10,12 +10,13 @@ import { CommandIcon } from '@/icons/Command'
 import { pruneArray } from '@/utils/prune_array'
 
 import { KeyboardShortcut } from '../../components/ui/KeyboardShortcut'
+import { Shortcut } from './types'
 import { useCommandMenuItems } from './use_command_menu_items'
 import { getFlattenedCommandMenuItems } from './utils'
 
 export const CommandMenu: React.FC = () => {
   const [isCommandMenuOpen, setIsCommandMenuOpen] = useState(false)
-  const [value, setValue] = useState<string>()
+  const [value, setValue] = useState<string | undefined>(undefined)
   const [tabs, setTabs] = useState(['Home'])
 
   const items = useCommandMenuItems()
@@ -24,7 +25,7 @@ export const CommandMenu: React.FC = () => {
   const shortcuts = pruneArray(
     flattenedItems.map(({ shortcut, action }) => {
       if (shortcut && action) {
-        return [shortcut, action] as [string, () => void]
+        return [shortcut, action] as Shortcut
       }
     }),
   )
@@ -133,9 +134,7 @@ export const CommandMenu: React.FC = () => {
                         >
                           <Icon className="box-content h-6 w-6" />
                           <span className="flex-1">{title}</span>
-                          {shortcut ? (
-                            <KeyboardShortcut shortcut={shortcut} />
-                          ) : null}
+                          {shortcut && <KeyboardShortcut shortcut={shortcut} />}
                         </Command.Item>
                       ),
                     )}
