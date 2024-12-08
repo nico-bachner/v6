@@ -22,18 +22,19 @@ export const Card: React.FC<CardProps> = ({
   additionalInfo,
   className,
 }) => {
+  const [hovered, setHovered] = useState(false)
   const [active, setActive] = useState(false)
 
   return (
     <Link
       href={href}
-      onMouseOver={() => setActive(true)}
-      onMouseOut={() => setActive(false)}
+      onMouseOver={() => setHovered(true)}
+      onMouseOut={() => setHovered(false)}
       onFocus={() => setActive(true)}
       onBlur={() => setActive(false)}
       className={cn(
         'relative flex flex-col gap-2 rounded-lg border p-8 transition-colors focus:outline-none sm:gap-3 sm:p-10 lg:gap-4 lg:p-12',
-        active ? 'bg-highlight-2' : 'bg-highlight-1',
+        hovered || active ? 'bg-highlight-2' : 'bg-highlight-1',
         className,
       )}
     >
