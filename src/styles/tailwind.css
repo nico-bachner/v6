@@ -48,6 +48,11 @@
   border-bottom-color: var(--color-primary-1);
 }
 
+.prose > img {
+  max-height: 70vh;
+  @apply mx-auto w-auto;
+}
+
 /* rehype-highlight */
 .hljs-keyword,
 .hljs-name {
@@ -55,4 +60,9 @@
 }
 .hljs-comment {
   @apply font-light text-primary-1;
+}
+
+/* rehype-katex */
+.katex > .katex-html {
+  @apply hidden;
 }

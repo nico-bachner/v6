@@ -4,9 +4,11 @@ The sixth iteration of my personal website.
 
 ## Features
 
-- Light & Dark mode (using [`next-themes`](https://github.com/pacocoursey/next-themes))
+- Light & Dark mode (using
+  [`next-themes`](https://github.com/pacocoursey/next-themes))
 - Command Menu (using [⌘K](https://cmdk.paco.me))
-- [MDX](https://mdxjs.com) content (using [`@next/mdx`](https://nextjs.org/docs/app/building-your-application/configuring/mdx#nextmdx))
+- [MDX](https://mdxjs.com) content (using
+  [`@next/mdx`](https://nextjs.org/docs/app/building-your-application/configuring/mdx#nextmdx))
 
 ## Tech Stack
 
@@ -35,7 +37,8 @@ Go to the project directory:
 cd v6
 ```
 
-Install the projects dependencies (assumes you have [@antfu/ni](https://github.com/antfu/ni) installed):
+Install the projects dependencies (assumes you have
+[@antfu/ni](https://github.com/antfu/ni) installed):
 
 ```
 ni

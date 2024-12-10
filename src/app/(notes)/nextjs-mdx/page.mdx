@@ -1,16 +1,26 @@
 ---
 title: Next.js + MDX
-description: A guide to using Next.js and MDX to render markdown content with custom components from a remote source
+description:
+  A guide to using Next.js and MDX to render markdown content with custom
+  components from a remote source
 published: 2022-03-28
 ---
 
 ## Next.js Setup
 
-First, we need to get a project set up, otherwise we won't have anything to add mdx content to.
+First, we need to get a project set up, otherwise we won't have anything to add
+mdx content to.
 
-If you already have your own Next.js project, you can skip ahead to the [MDX Setup](#mdx-setup).
+If you already have your own Next.js project, you can skip ahead to the
+[MDX Setup](#mdx-setup).
 
-If not, the easiest way to get a Next.js project off the ground is using the `create-next-app` npm package, which scaffolds an entire project for you. You can execute the package using your favourite Node.js package manager (such as [npm](https://www.npmjs.com), [yarn](https://yarnpkg.com), or [pnpm](https://pnpm.io))[^1]. Alternatively, you can also use [ni](https://github.com/antfu/ni)[^2], which is what I'll use for this guide to avoid confusion. Choose a package manager and you will be good to go.
+If not, the easiest way to get a Next.js project off the ground is using the
+`create-next-app` npm package, which scaffolds an entire project for you. You
+can execute the package using your favourite Node.js package manager (such as
+[npm](https://www.npmjs.com), [yarn](https://yarnpkg.com), or
+[pnpm](https://pnpm.io))[^1]. Alternatively, you can also use
+[ni](https://github.com/antfu/ni)[^2], which is what I'll use for this guide to
+avoid confusion. Choose a package manager and you will be good to go.
 
 ```sh
 nx create-next-app --ts next-mdx-project
@@ -22,7 +32,9 @@ Next, navigate to the created project.
 cd next-mdx-project/
 ```
 
-Now start the development server and go to [http://localhost:3000](http://localhost:3000) to see the project live in action.
+Now start the development server and go to
+[http://localhost:3000](http://localhost:3000) to see the project live in
+action.
 
 ```
 nr dev
@@ -30,14 +42,27 @@ nr dev
 
 ## MDX Setup
 
-[MDX](https://mdx-js.com) is a language that builds on the standard [Commonmark](https://commonmark.org) syntax by adding the capability to use custom components inside your markdown. These components can be [React](https://reactjs.org) components ([mdx-js/react](https://github.com/mdx-js/mdx/tree/master/packages/react)), [Vue](https://vuejs.org) components ([mdx-js/vue](https://github.com/mdx-js/mdx/tree/master/packages/vue)), or even [Svelte](https://svelte.dev) components ([MDsveX](https://mdsvex.com))
+[MDX](https://mdx-js.com) is a language that builds on the standard
+[Commonmark](https://commonmark.org) syntax by adding the capability to use
+custom components inside your markdown. These components can be
+[React](https://reactjs.org) components
+([mdx-js/react](https://github.com/mdx-js/mdx/tree/master/packages/react)),
+[Vue](https://vuejs.org) components
+([mdx-js/vue](https://github.com/mdx-js/mdx/tree/master/packages/vue)), or even
+[Svelte](https://svelte.dev) components ([MDsveX](https://mdsvex.com))
 
 There are two main methods of using MDX in a Next.js project:
 
-1. [`@next/mdx`](https://github.com/vercel/next.js/tree/canary/packages/next-mdx), the official MDX plugin for Next.js
-2. [`next-mdx-remote`](https://github.com/hashicorp/next-mdx-remote), a community package maintained by [Hashicorp](https://www.hashicorp.com) that allows you to use MDX from outside your project.
+1. [`@next/mdx`](https://github.com/vercel/next.js/tree/canary/packages/next-mdx),
+   the official MDX plugin for Next.js
+2. [`next-mdx-remote`](https://github.com/hashicorp/next-mdx-remote), a
+   community package maintained by [Hashicorp](https://www.hashicorp.com) that
+   allows you to use MDX from outside your project.
 
-While `@next/mdx` is a wonderful package perfect for simple use cases, it lacks some advanced features. For example, it doesn't have an adequate solution for dealing with frontmatter. Therefore, this guide uses `next-mdx-remote` for more flexibility.
+While `@next/mdx` is a wonderful package perfect for simple use cases, it lacks
+some advanced features. For example, it doesn't have an adequate solution for
+dealing with frontmatter. Therefore, this guide uses `next-mdx-remote` for more
+flexibility.
 
 ```
 ni next-mdx-remote
@@ -45,7 +70,10 @@ ni next-mdx-remote
 
 ## Creating Content
 
-You'll need a data source to pull your content from. Since next-mdx-remote only needs to read a text file in order to work, there are many options to choose from. For example, this source can be a folder in your project[^3], another GitHub repository[^4], or an external service.
+You'll need a data source to pull your content from. Since next-mdx-remote only
+needs to read a text file in order to work, there are many options to choose
+from. For example, this source can be a folder in your project[^3], another
+GitHub repository[^4], or an external service.
 
 This guide will use a local directory called `content/` inside the project:
 
@@ -73,11 +101,14 @@ src/
     └── [...path].tsx
 ```
 
-In `fs.ts`, we will work closely with the [Node.js standard library file system module](https://nodejs.org/dist/latest-v16.x/docs/api/fs.html).
+In `fs.ts`, we will work closely with the
+[Node.js standard library file system module](https://nodejs.org/dist/latest-v16.x/docs/api/fs.html).
 
-We fetch the file paths using the `readdir` function and fetch the contents of each file using the `readFile` function.
+We fetch the file paths using the `readdir` function and fetch the contents of
+each file using the `readFile` function.
 
-_Note: `basePath` and `path` are arrays because that makes them a lot easier to work with when adding and removing elements._
+_Note: `basePath` and `path` are arrays because that makes them a lot easier to
+work with when adding and removing elements._
 
 ```ts
 // lib/fs.ts
@@ -133,7 +164,10 @@ export const fetchPaths = async ({
 }
 ```
 
-In `mdx.ts`, we create a wrapper function around next-mdx-remote's `serialize` function, where we can add [remark](https://github.com/remarkjs) and [rehype](https://github.com/rehypejs) plugins if we want. We will also provide more transparent typing.
+In `mdx.ts`, we create a wrapper function around next-mdx-remote's `serialize`
+function, where we can add [remark](https://github.com/remarkjs) and
+[rehype](https://github.com/rehypejs) plugins if we want. We will also provide
+more transparent typing.
 
 ```ts
 // lib/mdx.ts
@@ -157,7 +191,9 @@ export const fetchMDXContent = async (file: string): Promise<MDXContent> =>
   })
 ```
 
-In `MDX.ts`, we wrap the existing MDXRemote component so that we can add custom components globally. This is not necessary depending on your requirements, so feel free to skip this step if you don't need it.
+In `MDX.ts`, we wrap the existing MDXRemote component so that we can add custom
+components globally. This is not necessary depending on your requirements, so
+feel free to skip this step if you don't need it.
 
 ```tsx
 // components/MDX.tsx
@@ -180,13 +216,20 @@ export const MDX: React.VFC<MDXProps> = ({ content, components }) => (
 )
 ```
 
-Lastly, in `[path].tsx`, it all comes together. We pull in all the modules we have created so far, and use them here.
+Lastly, in `[path].tsx`, it all comes together. We pull in all the modules we
+have created so far, and use them here.
 
-We begin by registering the file paths we collected in Next.js. We do this by calling the special function [`getStaticPaths`](https://nextjs.org/docs/basic-features/data-fetching/get-static-paths).
+We begin by registering the file paths we collected in Next.js. We do this by
+calling the special function
+[`getStaticPaths`](https://nextjs.org/docs/basic-features/data-fetching/get-static-paths).
 
-Next, based on the current file path, we fetch the respective content of the file. Similarly to `getStaticPaths`, there exists a special function [`getStaticProps`](https://nextjs.org/docs/basic-features/data-fetching/get-static-props) for this as well.
+Next, based on the current file path, we fetch the respective content of the
+file. Similarly to `getStaticPaths`, there exists a special function
+[`getStaticProps`](https://nextjs.org/docs/basic-features/data-fetching/get-static-props)
+for this as well.
 
-Last, we pull in the content as a prop in the main page component and render it using our MDX component.
+Last, we pull in the content as a prop in the main page component and render it
+using our MDX component.
 
 ```tsx
 // pages/[path].tsx
@@ -266,10 +309,30 @@ const MDXPage: NextPage<PageProps> = ({ content }) => (
 export default MDXPage
 ```
 
-[^1]: I highly recommend pnpm — it's faster than yarn, and way faster than npm. Also, your `node_modules/` will be much more organised with pnpm, since only the packages defined in your `package.json` will be included in the root of the directory.
+[^1]:
+    I highly recommend pnpm — it's faster than yarn, and way faster than npm.
+    Also, your `node_modules/` will be much more organised with pnpm, since only
+    the packages defined in your `package.json` will be included in the root of
+    the directory.
 
-[^2]: [Anthony Fu](https://antfu.me) has created a tool called [ni](https://github.com/antfu/ni) that makes choosing the correct node.js package manager much easier. If you are inside an existing project that contains a lockfile, it will automatically use the corresponding package manager ([npm](https://www.npmjs.com), [yarn](https://yarnpkg.com), or [pnpm](https://pnpm.io)). If no lockfile is found, you will have the option to choose which package manager you'd like to use. If you don't have _ni_ installed, you can use npm, yarn, or pnpm directly, or you can install it via one of them.
+[^2]:
+    [Anthony Fu](https://antfu.me) has created a tool called
+    [ni](https://github.com/antfu/ni) that makes choosing the correct node.js
+    package manager much easier. If you are inside an existing project that
+    contains a lockfile, it will automatically use the corresponding package
+    manager ([npm](https://www.npmjs.com), [yarn](https://yarnpkg.com), or
+    [pnpm](https://pnpm.io)). If no lockfile is found, you will have the option
+    to choose which package manager you'd like to use. If you don't have _ni_
+    installed, you can use npm, yarn, or pnpm directly, or you can install it
+    via one of them.
 
-[^3]: A common approach is storing your content in a folder in the root directory of your project. Often this folder is called something along the lines of `content/` or `data/`.
+[^3]:
+    A common approach is storing your content in a folder in the root directory
+    of your project. Often this folder is called something along the lines of
+    `content/` or `data/`.
 
-[^4]: Usually the markdown files are committed to the external repository—an approach often favoured by documentation sites. However, you might want to also look into using GitHub issues as a CMS, which [swyx](https://swyx.io) does for [his site](https://github.com/sw-yx/swyxdotio).
+[^4]:
+    Usually the markdown files are committed to the external repository—an
+    approach often favoured by documentation sites. However, you might want to
+    also look into using GitHub issues as a CMS, which [swyx](https://swyx.io)
+    does for [his site](https://github.com/sw-yx/swyxdotio).

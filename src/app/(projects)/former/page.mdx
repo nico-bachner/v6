@@ -1,0 +1,47 @@
+---
+title: Former
+description: Reverse engineered version of the NRK's popular minigame
+from: 2024-11-01
+---
+
+import former from './images/former.png'
+import nrkFormer from './images/nrk-former.png'
+
+## Purpose
+
+The goal of the project is to design an algorithm that can optimally solve the
+[Norwegian Public Broadcasting Organisation](https://www.nrk.no)'s
+[Former Minigame](https://www.nrk.no/former-1.17105310), which is believed to be
+NP-Hard.
+
+To visualise test scores of different algorithms against the game, I ended up
+fully [reverse engineering the original](https://nrk-former.vercel.app). The
+algorithm suggests the best move to make based on the current board state. By
+iterating through the steps individually in this way, it is easier to see what
+steps are being taken and what potential fine-tuning the algorithm could benefit
+from.
+
+So far, a simple greedy approach has achieved the best score (solved the game in
+the least number of turns). However, it is only able to look 4 moves into the
+future before it becomes too slow to be usable. This is because the current
+implementation has a running time of $O(n^m)$, where $n$ is the size of the
+board, and $m$ is the (unknown) minimum number of turns needed to solve the
+game. Fortunately, in most permutations of the board, $m \lt 20$. With proper
+branch pruning, solving the game in a reasonable amount of time should
+theoretically be possible.
+
+## Gameplay
+
+The aim of the game is to rid the board of all the tiles in as few moves as
+possible. The player plays against themselves by trying to beat their high
+score.
+
+## Gallery
+
+### Original game
+
+<Image src={nrkFormer} />
+
+### Reverse engineered version
+
+<Image src={former} />

@@ -1,14 +1,22 @@
 ---
 title: CSS Modules
-description: A collection of tips & tricks for styling versatile React components using CSS Modules
+description:
+  A collection of tips & tricks for styling versatile React components using CSS
+  Modules
 published: 2021-09-10
 ---
 
-[CSS Modules](https://github.com/css-modules/css-modules) are one of the most common methods to style React applications. Because they consist of plain CSS, they are easily understandable.
+[CSS Modules](https://github.com/css-modules/css-modules) are one of the most
+common methods to style React applications. Because they consist of plain CSS,
+they are easily understandable.
 
-CSS Modules achieve what is referred to as **_weak scoping_**. Although styles are scoped to their respective components, they can be overridden by external styles. Depending on how you use this property, this is what makes CSS Modules so useful.
+CSS Modules achieve what is referred to as **_weak scoping_**. Although styles
+are scoped to their respective components, they can be overridden by external
+styles. Depending on how you use this property, this is what makes CSS Modules
+so useful.
 
-The usual approach to styling components using CSS Modules looks something like this:
+The usual approach to styling components using CSS Modules looks something like
+this:
 
 The CSS is written in a `.module.css` file, and target class names.
 
@@ -20,7 +28,9 @@ The CSS is written in a `.module.css` file, and target class names.
 }
 ```
 
-These classes are then imported as a JS object – usually given the name `styles`. The imported object is has the class names defined in the `.module.css` file as keys.
+These classes are then imported as a JS object – usually given the name
+`styles`. The imported object is has the class names defined in the
+`.module.css` file as keys.
 
 ```tsx
 // Component.tsx
@@ -40,9 +50,13 @@ export const ParentComponent: React.VFC = () => (
 )
 ```
 
-That's all well and good. But what if you want to be able to adjust the styles from **outside** the component? Now things start to get tricky.
+That's all well and good. But what if you want to be able to adjust the styles
+from **outside** the component? Now things start to get tricky.
 
-Fortunately, CSS Module imports are regular JavaScript objects. That means we can manipulate them as we usually would. One possible manipulation that is especially useful for us is **_string indexing[^1]_**. It allows us to choose which style to apply based on a string input.
+Fortunately, CSS Module imports are regular JavaScript objects. That means we
+can manipulate them as we usually would. One possible manipulation that is
+especially useful for us is **_string indexing[^1]_**. It allows us to choose
+which style to apply based on a string input.
 
 If we apply _string indexing_ to the previous example, we get the following:
 
@@ -86,11 +100,13 @@ export const ParentComponent: React.VFC = () => (
 )
 ```
 
-We now have the ability to change the styling of the component through one of its props.
+We now have the ability to change the styling of the component through one of
+its props.
 
 But why stop there? What about styling through **multiple** props?
 
-It is possible, and can be achieved through **_string concatenation[^2]_**. Applied to our example, it looks like so:
+It is possible, and can be achieved through **_string concatenation[^2]_**.
+Applied to our example, it looks like so:
 
 ```css
 /* Component.module.css */
@@ -152,7 +168,9 @@ export const ParentComponent: React.VFC = () => (
 )
 ```
 
-If distilling all component styling into props feels too limiting, there exists a solution. It is possible to give a component custom styles by passing it a `className` prop:
+If distilling all component styling into props feels too limiting, there exists
+a solution. It is possible to give a component custom styles by passing it a
+`className` prop:
 
 ```css
 /* Component.module.css */
@@ -200,10 +218,21 @@ export const ParentComponent: React.VFC = () => (
 )
 ```
 
-One thing to look out for is the whitespace as the argument of `.join()`. Without it, the class names would be concatenated into one long name which the browser cannot recognise. Adding the space separates the class names into recognisable tokens.
+One thing to look out for is the whitespace as the argument of `.join()`.
+Without it, the class names would be concatenated into one long name which the
+browser cannot recognise. Adding the space separates the class names into
+recognisable tokens.
 
-Notice how have full control over how fine-grain the control should be? While the first example only had one prop (the `variant`), the second had a prop for each individual style property (`property1` and `property2`). The ability to choose the level of abstraction can be useful in many situations, such as architecting a design system.
+Notice how have full control over how fine-grain the control should be? While
+the first example only had one prop (the `variant`), the second had a prop for
+each individual style property (`property1` and `property2`). The ability to
+choose the level of abstraction can be useful in many situations, such as
+architecting a design system.
 
-[^1]: **String indexing:** The accessing a property of an object using the corresponding string
+[^1]:
+    **String indexing:** The accessing a property of an object using the
+    corresponding string
 
-[^2]: **String concatenation:** The joining of two strings together into one large string
+[^2]:
+    **String concatenation:** The joining of two strings together into one large
+    string

@@ -1,15 +1,19 @@
 ---
 title: Mac Setup
-description: The procedure I refer to when performing a clean (re)install on an Apple Macintosh
+description:
+  The procedure I refer to when performing a clean (re)install on an Apple
+  Macintosh
 ---
 
-This is the procedure I refer to when performing a clean (re)install on an Apple Macintosh running MacOS Sonoma.
+This is the procedure I refer to when performing a clean (re)install on an Apple
+Macintosh running MacOS Sonoma.
 
 ## Settings Adjustments
 
 ### System Settings
 
-Once the initial setup procedure is done, customise the trackpad settings (`System Settings > View > Trackpad`).
+Once the initial setup procedure is done, customise the trackpad settings
+(`System Settings > View > Trackpad`).
 
 In the _Point & Click_ tab
 
@@ -51,7 +55,8 @@ Then, the _Date & Time_ settings (`View > Date & Time`):
 1. Adjust _Settings_ (`Safari > Settings`):
 
    - In _Search_, switch the default search engine.
-   - In _Advanced_, turn on _Show full website address_ and _Show Develop menu in menu bar_
+   - In _Advanced_, turn on _Show full website address_ and _Show Develop menu
+     in menu bar_
 
 2. Show Status Bar: `View > Show Status Bar`
 
@@ -98,19 +103,22 @@ defaults write -g NSAutomaticSpellingCorrectionEnabled -bool false
    chsh -s /opt/homebrew/bin/fish
    ```
 
-3. Since it is a new shell, Homebrew is no longer in `$PATH`, so it needs to be re-added:
+3. Since it is a new shell, Homebrew is no longer in `$PATH`, so it needs to be
+   re-added:
 
    ```bash
    fish_add_path /opt/homebrew/bin
    ```
 
-4. When opening a new terminal window, fish shows a welcome message. To disable this, run the following:
+4. When opening a new terminal window, fish shows a welcome message. To disable
+   this, run the following:
 
    ```bash
    set -U fish_greeting ""
    ```
 
-5. To make the terminal more interactive, install [Starship](https://starship.rs):
+5. To make the terminal more interactive, install
+   [Starship](https://starship.rs):
 
    ```bash
    brew install starship
@@ -242,7 +250,8 @@ Go to _Terminal > Settings_ and change the font to **Fira Code**.
 
 2. Open Raycast
 
-3. Disable Spotlight hotkey (`System Settings > View > Keyboard > Keyboard Shortcuts > Spotlight > Show Spotlight search`)
+3. Disable Spotlight hotkey
+   (`System Settings > View > Keyboard > Keyboard Shortcuts > Spotlight > Show Spotlight search`)
 
 4. Set Raycast shortcut to `cmd + space`.
 
