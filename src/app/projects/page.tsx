@@ -1,4 +1,4 @@
-import { Card } from '@/components/client/Card'
+import { Card } from '@/components/ui/Card'
 import { Text } from '@/components/ui/Text'
 import { fetchProjects } from '@/lib/fetchProjects'
 
