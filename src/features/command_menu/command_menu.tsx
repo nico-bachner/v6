@@ -16,7 +16,7 @@ import { getFlattenedCommandMenuItems } from './utils'
 
 export const CommandMenu: React.FC = () => {
   const [isCommandMenuOpen, setIsCommandMenuOpen] = useState(false)
-  const [value, setValue] = useState('')
+  const [searchQuery, setSearchQuery] = useState('')
   const [tabs, setTabs] = useState(['Home'])
 
   const items = useCommandMenuItems()
@@ -36,8 +36,10 @@ export const CommandMenu: React.FC = () => {
   ])
 
   const currentTabItems =
-    flattenedItems.find(({ id }) => tabs[tabs.length - 1] == id)?.children ??
-    items
+    searchQuery != ''
+      ? flattenedItems
+      : (flattenedItems.find(({ id }) => tabs[tabs.length - 1] == id)
+          ?.children ?? items)
 
   return (
     <>
@@ -55,7 +57,7 @@ export const CommandMenu: React.FC = () => {
       <Dialog
         open={isCommandMenuOpen}
         onOpenChange={() => {
-          setValue('')
+          setSearchQuery('')
 
           if (tabs.length > 1) {
             setTabs(tabs.slice(0, tabs.length - 1))
@@ -71,8 +73,8 @@ export const CommandMenu: React.FC = () => {
               <Command.Input
                 className="w-full bg-transparent text-md outline-none placeholder:text-primary-1"
                 placeholder="Type a command or search..."
-                value={value}
-                onValueChange={(value) => setValue(value)}
+                value={searchQuery}
+                onValueChange={(searchQuery) => setSearchQuery(searchQuery)}
               />
             </div>
             <div className="flex justify-between px-3">
