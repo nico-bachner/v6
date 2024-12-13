@@ -16,7 +16,7 @@ import { getFlattenedCommandMenuItems } from './utils'
 
 export const CommandMenu: React.FC = () => {
   const [isCommandMenuOpen, setIsCommandMenuOpen] = useState(false)
-  const [value, setValue] = useState<string | undefined>(undefined)
+  const [value, setValue] = useState('')
   const [tabs, setTabs] = useState(['Home'])
 
   const items = useCommandMenuItems()
@@ -54,11 +54,15 @@ export const CommandMenu: React.FC = () => {
 
       <Dialog
         open={isCommandMenuOpen}
-        onOpenChange={(isCommandMenuOpen) =>
-          !isCommandMenuOpen && tabs.length > 1
-            ? setTabs(tabs.slice(0, tabs.length - 1))
-            : setIsCommandMenuOpen(false)
-        }
+        onOpenChange={() => {
+          setValue('')
+
+          if (tabs.length > 1) {
+            setTabs(tabs.slice(0, tabs.length - 1))
+          } else {
+            setIsCommandMenuOpen(false)
+          }
+        }}
       >
         <Command className="bg-transparent">
           <div className="flex flex-col-reverse gap-3 p-3">
