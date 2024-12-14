@@ -1,9 +1,9 @@
 import { Analytics } from '@vercel/analytics/react'
 import type { Metadata } from 'next'
+import { ThemeProvider } from 'next-themes'
 import { Fraunces, Inter } from 'next/font/google'
 
 import { CommandMenu } from '@/features/command_menu'
-import { Theme } from '@/providers/Theme'
 import '@/styles/tailwind.css'
 import { cn } from '@/utils/cn'
 
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
 }
 
 const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => (
-  <html lang="en">
+  <html lang="en" suppressHydrationWarning>
     <body
       className={cn(
         'bg-theme font-sans text-primary-2',
@@ -34,11 +34,11 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => (
         serif.variable,
       )}
     >
-      <Theme>
+      <ThemeProvider>
         <CommandMenu />
 
         {children}
-      </Theme>
+      </ThemeProvider>
 
       <Analytics />
     </body>
