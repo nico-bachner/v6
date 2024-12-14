@@ -3,7 +3,7 @@
 import { MagnifyingGlassIcon } from '@heroicons/react/24/outline'
 import { useHotkeys } from '@mantine/hooks'
 import { Command } from 'cmdk'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import { Dialog } from '@/components/client/Dialog'
 import { CommandIcon } from '@/icons/Command'
@@ -30,16 +30,18 @@ export const CommandMenu: React.FC = () => {
     }),
   )
 
+  useEffect(() => {
+    setSearchQuery('')
+  }, [tabs, isCommandMenuOpen])
+
   useHotkeys([
     ['mod+k', () => setIsCommandMenuOpen(!isCommandMenuOpen)],
     ...shortcuts,
   ])
 
   const currentTabItems =
-    searchQuery != ''
-      ? flattenedItems
-      : (flattenedItems.find(({ id }) => tabs[tabs.length - 1] == id)
-          ?.children ?? items)
+    flattenedItems.find(({ id }) => tabs[tabs.length - 1] == id)?.children ??
+    items
 
   return (
     <>
@@ -57,8 +59,6 @@ export const CommandMenu: React.FC = () => {
       <Dialog
         open={isCommandMenuOpen}
         onOpenChange={() => {
-          setSearchQuery('')
-
           if (tabs.length > 1) {
             setTabs(tabs.slice(0, tabs.length - 1))
           } else {
