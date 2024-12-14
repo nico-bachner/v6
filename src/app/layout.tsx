@@ -3,7 +3,9 @@ import type { Metadata } from 'next'
 import { ThemeProvider } from 'next-themes'
 import { Fraunces, Inter } from 'next/font/google'
 
+import { CommandMenuTrigger } from '@/components/ui/CommandMenuTrigger'
 import { CommandMenu } from '@/features/command_menu'
+import { CommandMenuProvider } from '@/features/command_menu/provider'
 import '@/styles/tailwind.css'
 import { cn } from '@/utils/cn'
 
@@ -35,9 +37,11 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => (
       )}
     >
       <ThemeProvider>
-        <CommandMenu />
+        <CommandMenuProvider>
+          <CommandMenuTrigger />
 
-        {children}
+          {children}
+        </CommandMenuProvider>
       </ThemeProvider>
 
       <Analytics />
