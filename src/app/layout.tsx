@@ -6,6 +6,7 @@ import { Fraunces, Inter } from 'next/font/google'
 import { CommandMenuTrigger } from '@/components/ui/CommandMenuTrigger'
 import { CommandMenuProvider } from '@/features/command_menu/provider'
 import '@/styles/tailwind.css'
+import { LayoutProps } from '@/types/next'
 import { cn } from '@/utils/cn'
 
 const sans = Inter({
@@ -24,10 +25,6 @@ export const metadata: Metadata = {
   title: 'Nico Bachner',
   description: 'Student. Developer. Entrepreneur.',
   metadataBase: new URL('https://nicobachner.com'),
-}
-
-type LayoutProps = {
-  children: React.ReactNode
 }
 
 const Layout: React.FC<LayoutProps> = ({ children }) => (
