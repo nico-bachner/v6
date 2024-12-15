@@ -57,7 +57,6 @@ export const ContentTemplate: React.FC<ContentTemplateProps> = ({
       className={cn(
         'prose mx-auto w-full max-w-screen-lg sm:prose-lg lg:prose-xl',
 
-        'prose-headings:mx-auto prose-headings:w-full prose-headings:max-w-screen-sm prose-headings:text-primary-3',
         'prose-p:mx-auto prose-p:w-full prose-p:max-w-screen-sm prose-p:text-primary-2',
         'prose-a:text-primary-3',
         'prose-blockquote:mx-auto prose-blockquote:w-full prose-blockquote:max-w-screen-sm',

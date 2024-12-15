@@ -40,6 +40,12 @@
 }
 
 /* @tailwindcss/typography */
+.prose > h1,
+.prose > h2,
+.prose > h3 {
+  @apply mx-auto w-full max-w-screen-sm text-primary-3;
+}
+
 .prose > blockquote {
   border-color: var(--color-primary-1);
 }
@@ -48,13 +54,13 @@
   @apply border-0 bg-highlight-1;
 }
 .prose > table tr {
-  @apply flex flex-row border-0 even:bg-highlight-1;
+  @apply border-0 even:bg-highlight-1;
 }
 .prose > table th {
-  @apply flex-1 p-2 text-primary-3 sm:p-3 lg:p-4;
+  @apply p-2 text-primary-3 sm:p-3 lg:p-4;
 }
 .prose > table td {
-  @apply flex-1 p-2 text-primary-2 sm:p-3 lg:p-4;
+  @apply p-2 text-primary-2 sm:p-3 lg:p-4;
 }
 
 .prose > img {
