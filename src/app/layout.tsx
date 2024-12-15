@@ -4,7 +4,6 @@ import { ThemeProvider } from 'next-themes'
 import { Fraunces, Inter } from 'next/font/google'
 
 import { CommandMenuTrigger } from '@/components/ui/CommandMenuTrigger'
-import { CommandMenu } from '@/features/command_menu'
 import { CommandMenuProvider } from '@/features/command_menu/provider'
 import '@/styles/tailwind.css'
 import { cn } from '@/utils/cn'
@@ -27,7 +26,11 @@ export const metadata: Metadata = {
   metadataBase: new URL('https://nicobachner.com'),
 }
 
-const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => (
+type LayoutProps = {
+  children: React.ReactNode
+}
+
+const Layout: React.FC<LayoutProps> = ({ children }) => (
   <html lang="en" suppressHydrationWarning>
     <body
       className={cn(
