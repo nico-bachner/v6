@@ -51,24 +51,9 @@ export const ContentTemplate: React.FC<ContentTemplateProps> = ({
       </div>
     </div>
 
-    <hr className="border-neutral mx-auto w-full max-w-screen-sm" />
+    <hr className="mx-auto w-full max-w-screen-sm" />
 
-    <article
-      className={cn(
-        'prose mx-auto w-full max-w-screen-lg sm:prose-lg lg:prose-xl',
-
-        'prose-p:mx-auto prose-p:w-full prose-p:max-w-screen-sm prose-p:text-primary-2',
-        'prose-a:text-primary-3',
-        'prose-blockquote:mx-auto prose-blockquote:w-full prose-blockquote:max-w-screen-sm',
-        'prose-strong:text-primary-3',
-        'prose-code:text-primary-3',
-        'prose-pre:mx-auto prose-pre:w-full prose-pre:max-w-screen-md prose-pre:bg-highlight-1',
-        'prose-ol:mx-auto prose-ol:w-full prose-ol:max-w-screen-sm',
-        'prose-ul:mx-auto prose-ul:w-full prose-ul:max-w-screen-sm',
-        'prose-li:text-primary-2',
-        'prose-hr:mx-auto prose-hr:w-full prose-hr:max-w-screen-sm',
-      )}
-    >
+    <article className="prose mx-auto w-full max-w-screen-lg sm:prose-lg lg:prose-xl">
       {children}
     </article>
 

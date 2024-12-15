@@ -45,9 +45,35 @@
 .prose > h3 {
   @apply mx-auto w-full max-w-screen-sm text-primary-3;
 }
+.prose > p {
+  @apply mx-auto w-full max-w-screen-sm text-primary-2;
+}
+
+.prose a,
+.prose strong,
+.prose code {
+  @apply text-primary-3;
+}
 
 .prose > blockquote {
   border-color: var(--color-primary-1);
+  @apply mx-auto w-full max-w-screen-sm;
+}
+
+.prose > ol,
+.prose > ul {
+  @apply mx-auto w-full max-w-screen-sm;
+}
+.prose li {
+  @apply text-primary-2;
+}
+
+.prose pre {
+  @apply mx-auto w-full max-w-screen-md bg-highlight-1;
+}
+
+.prose > hr {
+  @apply mx-auto w-full max-w-screen-sm;
 }
 
 .prose > table thead {
