@@ -42,10 +42,14 @@
 /* @tailwindcss/typography */
 .prose > h1,
 .prose > h2,
-.prose > h3 {
+.prose > h3,
+.prose > section > h1,
+.prose > section > h2,
+.prose > section > h3 {
   @apply mx-auto w-full max-w-screen-sm text-primary-3;
 }
-.prose > p {
+.prose > p,
+.prose > section > p {
   @apply mx-auto w-full max-w-screen-sm text-primary-2;
 }
 
@@ -55,16 +59,20 @@
   @apply text-primary-3;
 }
 
-.prose > blockquote {
+.prose > blockquote,
+.prose > section > blockquote {
   border-color: var(--color-primary-1);
   @apply mx-auto w-full max-w-screen-sm;
 }
 
 .prose > ol,
-.prose > ul {
+.prose > ul,
+.prose > section > ol,
+.prose > section > ul {
   @apply mx-auto w-full max-w-screen-sm;
 }
-.prose li {
+.prose li,
+.prose li::marker {
   @apply text-primary-2;
 }
 
@@ -72,24 +80,30 @@
   @apply mx-auto w-full max-w-screen-md bg-highlight-1;
 }
 
-.prose > hr {
+.prose > hr,
+.prose > section > hr {
   @apply mx-auto w-full max-w-screen-sm;
 }
 
-.prose > table thead {
+.prose > table thead,
+.prose > section > table thead {
   @apply border-0 bg-highlight-1;
 }
-.prose > table tr {
+.prose > table tr,
+.prose > section > table tr {
   @apply border-0 even:bg-highlight-1;
 }
-.prose > table th {
+.prose > table th,
+.prose > section > table th {
   @apply p-2 text-primary-3 sm:p-3 lg:p-4;
 }
-.prose > table td {
+.prose > table td,
+.prose > section > table td {
   @apply p-2 text-primary-2 sm:p-3 lg:p-4;
 }
 
-.prose > img {
+.prose > img,
+.prose > section > img {
   max-height: 70vh;
   @apply mx-auto w-auto;
 }
