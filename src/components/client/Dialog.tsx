@@ -1,14 +1,13 @@
 'use client'
 
-import { Content, Overlay, Portal, Root } from '@radix-ui/react-dialog'
+import { Dialog as RadixDialog } from 'radix-ui'
 import { useLayoutEffect, useState } from 'react'
 
 import { cn } from '@/utils/cn'
 
-export const Dialog: React.FC<React.ComponentProps<typeof Root>> = ({
-  children,
-  ...props
-}) => {
+export const Dialog: React.FC<
+  React.ComponentProps<typeof RadixDialog.Root>
+> = ({ children, ...props }) => {
   const [viewportDimensions, setViewportDimensions] = useState<{
     width?: number
     height?: number
@@ -38,11 +37,11 @@ export const Dialog: React.FC<React.ComponentProps<typeof Root>> = ({
   }, [])
 
   return (
-    <Root {...props}>
-      <Portal>
-        <Overlay className={cn('backdrop-blur', 'fixed inset-0')} />
+    <RadixDialog.Root {...props}>
+      <RadixDialog.Portal>
+        <RadixDialog.Overlay className={cn('backdrop-blur', 'fixed inset-0')} />
 
-        <Content
+        <RadixDialog.Content
           style={{
             top: viewportDimensions.height && viewportDimensions.height / 2,
             left: viewportDimensions.width && viewportDimensions.width / 2,
@@ -53,8 +52,8 @@ export const Dialog: React.FC<React.ComponentProps<typeof Root>> = ({
           )}
         >
           {children}
-        </Content>
-      </Portal>
-    </Root>
+        </RadixDialog.Content>
+      </RadixDialog.Portal>
+    </RadixDialog.Root>
   )
 }
