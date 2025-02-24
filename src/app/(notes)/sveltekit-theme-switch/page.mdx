@@ -23,10 +23,26 @@ The first thing we'll do is to define our **themes**. We can do this in the
 global type definitions (`src/global.d.ts`). That way, we'll have access to the
 types throughout our project.
 
-```ts
-// src/global.d.ts
-type Theme = 'system' | 'light' | 'dark'
-```
+<Tabs defaultValue="v5">
+  <TabTriggerList>
+    <TabTrigger value="v4">Svelte 4</TabTrigger>
+    <TabTrigger value="v5">Svelte 5</TabTrigger>
+  </TabTriggerList>
+  <TabContent value="v4">
+    ```ts
+    // src/global.d.ts
+    type Theme = 'system' | 'light' | 'dark'
+    ```
+  </TabContent>
+  <TabContent value="v5">
+    ```ts
+    // src/global.d.ts
+    type Theme = {
+      value: 'system' | 'light' | 'dark'
+    }
+    ```
+  </TabContent>
+</Tabs>
 
 What we're doing here is declaring a _global type_ called `Theme`, which we can
 access from anywhere in our project. This means that if we declare a variables
@@ -48,14 +64,29 @@ of the theme switch: the **theme store**.
 The theme store is a [Svelte Store](https://svelte.dev/docs#svelte_store). To
 create it, we use the `writable` function provided by Svelte.
 
-```ts
-// src/lib/stores.ts
-import { writable } from 'svelte/store'
+<Tabs defaultValue="v5">
+  <TabTriggerList>
+    <TabTrigger value="v4">Svelte 4</TabTrigger>
+    <TabTrigger value="v5">Svelte 5</TabTrigger>
+  </TabTriggerList>
+  <TabContent value="v4">
+    ```ts
+    // src/lib/stores.ts
+    import { writable } from 'svelte/store'
 
-const theme = writable('system')
+    export const theme = writable<Theme>('system')
+    ```
 
-export { theme }
-```
+  </TabContent>
+  <TabContent value="v5">
+    ```ts
+    // src/lib/theme.svelte.ts
+    export const theme = $state<Theme>({
+      value: 'system',
+    })
+    ```
+  </TabContent>
+</Tabs>
 
 Here, we're creating a Svelte Store called `theme` and assigning it the default
 value of `'system'`. Again, it is important that `'system'` is the default so
@@ -65,18 +96,42 @@ that we respect the user's preferences.
 
 We can now use the Svelte Store we created in our theme switch component.
 
-```html
-<!-- src/lib/components/ThemeSwitch.svelte -->
-<script lang="ts">
-  import { theme } from '$lib/stores'
-</script>
+<Tabs defaultValue="v5">
+  <TabTriggerList>
+    <TabTrigger value="v4">Svelte 4</TabTrigger>
+    <TabTrigger value="v5">Svelte 5</TabTrigger>
+  </TabTriggerList>
+  <TabContent value="v4">
+    ```html
+    <!-- src/lib/components/ThemeSwitch.svelte -->
+    <script lang="ts">
+      import { theme } from '$lib/stores'
+    </script>
 
-<select bind:value="{$theme}">
-  <option value="system">System</option>
-  <option value="light">Light</option>
-  <option value="dark">Dark</option>
-</select>
-```
+    <select bind:value={$theme}>
+      <option value="system">System</option>
+      <option value="light">Light</option>
+      <option value="dark">Dark</option>
+    </select>
+    ```
+
+  </TabContent>
+  <TabContent value="v5">
+    ```html
+    <!-- src/lib/components/ThemeSwitch.svelte -->
+    <script lang="ts">
+      import { theme } from '$lib/theme.svelte';
+    </script>
+
+    <select bind:value={theme.value}>
+      <option value="system">System</option>
+      <option value="light">Light</option>
+      <option value="dark">Dark</option>
+    </select>
+    ```
+
+  </TabContent>
+</Tabs>
 
 There's a lot going on here, so a quick walkthrough is in order.
 
@@ -103,22 +158,52 @@ for changing the theme based on the theme value.
 The way I went about this is swapping stylesheets in the head of the generated
 document.
 
-```html
-<!-- src/routes/+layout.svelte -->
-<script lang="ts">
-  import { theme } from '$lib/stores'
-</script>
+<Tabs defaultValue="v5">
+  <TabTriggerList>
+    <TabTrigger value="v4">Svelte 4</TabTrigger>
+    <TabTrigger value="v5">Svelte 5</TabTrigger>
+  </TabTriggerList>
+  <TabContent value="v4">
+    ```html
+    <!-- src/routes/+layout.svelte -->
+    <script lang="ts">
+      import { theme } from '$lib/stores'
+    </script>
 
-<svelte:head>
-  <meta
-    name="color-scheme"
-    content={$theme == 'system' ? 'light dark' : $theme}
-  />
-  <link rel="stylesheet" href={`/theme/${$theme}.css`} />
-</svelte:head>
+    <svelte:head>
+      <meta
+        name="color-scheme"
+        content={$theme == 'system' ? 'light dark' : $theme}
+      />
+      <link rel="stylesheet" href={`/theme/${$theme}.css`} />
+    </svelte:head>
 
-<slot />
-```
+    <slot />
+    ```
+
+  </TabContent>
+  <TabContent value="v5">
+    ```html
+    <!-- src/routes/+layout.svelte -->
+    <script lang="ts">
+      import { theme } from '$lib/stores'
+
+      let { children } = $props()
+    </script>
+
+    <svelte:head>
+      <meta
+        name="color-scheme"
+        content={$theme == 'system' ? 'light dark' : $theme}
+      />
+      <link rel="stylesheet" href={`/theme/${$theme}.css`} />
+    </svelte:head>
+
+    {@render children()}
+    ```
+
+  </TabContent>
+</Tabs>
 
 Here, we are dynamically loading a CSS stylesheet based on the current theme
 value. For example, on page load, the previous code will generate the following:

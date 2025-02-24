@@ -2,6 +2,7 @@ import type { MDXComponents } from 'mdx/types'
 import Image from 'next/image'
 import type { ImageProps } from 'next/image'
 import Link from 'next/link'
+import { Tabs } from 'radix-ui'
 
 export const useMDXComponents = (components: MDXComponents): MDXComponents => ({
   Image: ({ src, alt }: ImageProps) => <Image src={src} alt={alt} />,
@@ -13,5 +14,9 @@ export const useMDXComponents = (components: MDXComponents): MDXComponents => ({
         {children}
       </a>
     ),
+  Tabs: Tabs.Root,
+  TabTriggerList: Tabs.List,
+  TabTrigger: Tabs.Trigger,
+  TabContent: Tabs.Content,
   ...components,
 })
