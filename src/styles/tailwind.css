@@ -39,6 +39,32 @@
   @apply px-3 pb-2 pt-4 text-sm capitalize text-primary-1;
 }
 
+/* Tabs */
+.tabs {
+  @apply mx-auto w-full max-w-screen-md rounded border;
+}
+
+[role='tablist'] {
+  @apply flex w-full flex-row border-b;
+}
+
+[role='tab'] {
+  @apply flex-1 px-4 py-2 text-primary-2;
+}
+[role='tab'][data-state='active'] {
+  @apply rounded-t text-primary-3;
+}
+
+[role='tabpanel'] {
+  @apply p-4;
+}
+[role='tabpanel'] > *:first-child {
+  margin-top: 0;
+}
+[role='tabpanel'] > *:last-child {
+  margin-bottom: 0;
+}
+
 /* @tailwindcss/typography */
 .prose h1,
 .prose h2,

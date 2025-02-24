@@ -14,7 +14,11 @@ export const useMDXComponents = (components: MDXComponents): MDXComponents => ({
         {children}
       </a>
     ),
-  Tabs: Tabs.Root,
+  Tabs: ({ children, ...props }) => (
+    <Tabs.Root className="tabs" {...props}>
+      {children}
+    </Tabs.Root>
+  ),
   TabTriggerList: Tabs.List,
   TabTrigger: Tabs.Trigger,
   TabContent: Tabs.Content,
