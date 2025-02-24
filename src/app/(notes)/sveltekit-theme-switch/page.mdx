@@ -115,6 +115,22 @@ We can now use the Svelte Store we created in our theme switch component.
     </select>
     ```
 
+    There's a lot going on here, so a quick walkthrough is in order.
+
+    We first import `theme` from `'$lib/stores'`. `$lib/stores` is a path alias for
+    `src/lib/stores.svelte`, the file in which we created our theme Svelte Store.
+
+    We now want to modify the value of `theme`. We could do this by calling
+    `theme.set()` (more info in the
+    [writable stores documentation](https://svelte.dev/tutorial/writable-stores)).
+    However, there is **an easier way**: using
+    [auto-subscriptions](https://svelte.dev/tutorial/auto-subscriptions).
+
+    Since `$theme` is **_mutable_**[^2], we use the Svelte binding `bind:value` to
+    get `theme` to track the changes to the value of the selected option. The
+    browser does most of the heavy lifting in this case, since all we need to do is
+    read the `value` attribute.
+
   </TabContent>
   <TabContent value="v5">
     ```html
@@ -130,24 +146,19 @@ We can now use the Svelte Store we created in our theme switch component.
     </select>
     ```
 
+    There's a lot going on here, so a quick walkthrough is in order.
+
+    We first import `theme` from `'$lib/theme.svelte'`. `$lib/theme.svelte` is a
+    path alias for `src/lib/theme.svelte.ts`, the file in which we defined our theme
+    state
+
+    We now want to modify the value of `theme`. Since `theme` is **_mutable_**[^2],
+    we use the Svelte binding `bind:value` to get `theme` to track the changes to
+    the value of the selected option. The browser does most of the heavy lifting in
+    this case, since all we need to do is read the `value` attribute.
+
   </TabContent>
 </Tabs>
-
-There's a lot going on here, so a quick walkthrough is in order.
-
-We first import `theme` from `'$lib/stores'`. `$lib/stores` is a path alias for
-`src/lib/stores.svelte`, the file in which we created our theme Svelte Store.
-
-We now want to modify the value of `theme`. We could do this by calling
-`theme.set()` (more info in the
-[writable stores documentation](https://svelte.dev/tutorial/writable-stores)).
-However, there is **an easier way**: using
-[auto-subscriptions](https://svelte.dev/tutorial/auto-subscriptions).
-
-Since `$theme` is **_mutable_**[^2], we use the Svelte binding `bind:value` to
-get `theme` to track the changes to the value of the selected option. The
-browser does most of the heavy lifting in this case, since all we need to do is
-read the `value` attribute.
 
 ## Style Switcher
 
