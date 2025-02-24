@@ -61,21 +61,25 @@ preferred theme when they first visit the site. Therefore, we want the theme to
 Now that we've got type definitions out of the way, we can move on to the heart
 of the theme switch: the **theme store**.
 
-The theme store is a [Svelte Store](https://svelte.dev/docs#svelte_store). To
-create it, we use the `writable` function provided by Svelte.
-
 <Tabs defaultValue="v5">
   <TabTriggerList>
     <TabTrigger value="v4">Svelte 4</TabTrigger>
     <TabTrigger value="v5">Svelte 5</TabTrigger>
   </TabTriggerList>
   <TabContent value="v4">
+    The theme store is a [Svelte Store](https://svelte.dev/docs#svelte_store). To
+    create it, we use the `writable` function provided by Svelte.
+
     ```ts
     // src/lib/stores.ts
     import { writable } from 'svelte/store'
 
     export const theme = writable<Theme>('system')
     ```
+
+    Here, we're creating a Svelte Store called `theme` and assigning it the default
+    value of `'system'`. Again, it is important that `'system'` is the default so
+    that we respect the user's preferences.
 
   </TabContent>
   <TabContent value="v5">
@@ -85,16 +89,18 @@ create it, we use the `writable` function provided by Svelte.
       value: 'system',
     })
     ```
+
+    Here, we're using the [`$state` rune](https://svelte.dev/docs/svelte/$state) to
+    define an object called `theme` and assigning it the default value of
+    `'system'`. Again, it is important that `'system'` is the default so that we
+    respect the user's preferences.
+
   </TabContent>
 </Tabs>
 
-Here, we're creating a Svelte Store called `theme` and assigning it the default
-value of `'system'`. Again, it is important that `'system'` is the default so
-that we respect the user's preferences.
-
 ## Theme Switch Component
 
-We can now use the Svelte Store we created in our theme switch component.
+We can now use `theme` in our theme switch component.
 
 <Tabs defaultValue="v5">
   <TabTriggerList>
@@ -162,9 +168,9 @@ We can now use the Svelte Store we created in our theme switch component.
 
 ## Style Switcher
 
-We now have a Svelte Store that stores the theme value, and a theme switch
-component that updates the theme value. All that remains is the functionality
-for changing the theme based on the theme value.
+We now have a way to store the theme value, and a theme switch component that
+updates the theme value. All that remains is the functionality for changing the
+theme based on the theme value.
 
 The way I went about this is swapping stylesheets in the head of the generated
 document.
