@@ -45,14 +45,16 @@
 }
 
 [role='tablist'] {
-  @apply flex w-full flex-row border-b;
+  @apply flex w-full flex-row justify-end border-b p-2;
 }
 
 [role='tab'] {
-  @apply flex-1 px-4 py-2 text-primary-2;
+  @apply border px-3 py-1 text-primary-2;
+  border-color: transparent;
 }
 [role='tab'][data-state='active'] {
-  @apply rounded-t text-primary-3;
+  @apply rounded;
+  border-color: var(--color-primary-1);
 }
 
 [role='tabpanel'] {
