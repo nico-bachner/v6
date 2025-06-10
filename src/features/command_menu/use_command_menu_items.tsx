@@ -164,15 +164,6 @@ export const useCommandMenuItems = (): CommandMenuItem[] => {
       },
     },
     {
-      id: 'CV',
-      icon: UserIcon,
-      title: 'Curriculum Vitae',
-      group: 'Personal Info',
-      action: () => {
-        window.open('https://read.cv/nico_bachner')
-      },
-    },
-    {
       id: 'GitHub',
       icon: GitHubIcon,
       title: 'Browse my GitHub',
